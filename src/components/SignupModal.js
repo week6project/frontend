@@ -8,8 +8,9 @@ import ButtonDefault from './ButtonDefault'
 import { isModalGlobalToggleSignup } from '../redux/modules/signup'
 //style, images, etc
 import logo from '../images/logo.png'
-import {COLORS} from './StyleGlobal'
-
+import {COLORS} from '../style/StyleGlobal'
+import {IoMdCloseCircle} from 'react-icons/io'
+import '../css/style.css'
 
 
 const SignupModal = () => {
@@ -66,6 +67,7 @@ const SignupModal = () => {
             >회원가입</ButtonDefault>
           </StButtonBox>
         </StSignupModalInputForm>
+        <IoMdCloseCircle onClick={onClickCloseSignupModal} className="iconIoMdCloseCircle"></IoMdCloseCircle>
       </StSignupModalWrapBox>
       <StModalDim onClick={onClickCloseSignupModal}></StModalDim>
     </StSignupModalWrap>

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from '../pages/login';
 import Layout from './Layout';
+import { Posts } from '../pages/posts';
 
 // 2. Router 라는 함수를 만들고 아래와 같이 작성합니다.
 //BrowserRouter를 Router로 감싸는 이유는, 
@@ -11,7 +12,8 @@ const Router = () => {
     <BrowserRouter>
         <Layout>
             <Routes>
-                <Route path='/' element={<Login/>} />
+            <Route path='/' element={<Login/>} />
+            <Route path='/posts' element={<Posts/>} />
             </Routes>
         </Layout>
     </BrowserRouter>
