@@ -3,12 +3,23 @@ import styled from 'styled-components'
 import { useDispatch, useSelector} from 'react-redux';
 //component, hooks
 
-//style, images, etc
-
 import '../css/style.css'
 
-export const Posts = () => {
+const Posts = () => {
   return (
-    <div>Posts</div>
+    <StPostsWrap>Posts</StPostsWrap>
   )
 }
+
+
+const StPostsWrap=styled.div`
+  border: 1px solid red;
+  max-width: 1000px;
+  min-width: 380px;
+
+  margin: 0 auto;
+
+`
+
+
+export default Posts

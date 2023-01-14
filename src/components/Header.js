@@ -1,13 +1,21 @@
 import React from 'react'
 import { DefaultContext } from 'react-icons'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
 //style, images, etc
 import logo from '../images/logo.png'
 
+
 const Header = () => {
+
+    const navigate = useNavigate()
+    const onClickHeaderLogo=()=>{
+        navigate('/')
+    }
+
   return (
     <StHeaderWrap>
-        <StHeaderLogoImg></StHeaderLogoImg>
+        <StHeaderLogoImg onClick={onClickHeaderLogo}></StHeaderLogoImg>
     </StHeaderWrap>
   )
 }
@@ -22,6 +30,7 @@ const StHeaderLogoImg=styled.img.attrs({
     src: `${logo}`
 })`
     width: 50px;
+    cursor:pointer;
 `
 
 export default Header
