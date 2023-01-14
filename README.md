@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
-API 명세서
-https://docs.google.com/spreadsheets/d/1rrE9-8QeEqpbF8Klk7khSkzH3wmxrcfa2K53AArKNnU/edit#gid=1675644912
+👯API 명세서👯‍♂️
+‼️ https://docs.google.com/spreadsheets/d/1rrE9-8QeEqpbF8Klk7khSkzH3wmxrcfa2K53AArKNnU/edit#gid=1675644912
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
