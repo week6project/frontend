@@ -16,7 +16,7 @@ const Post = () => {
       </StNvHome>
       <StImg src="img/myGiraffe.png" alt="내기린_로고" />
 
-      <StView>image</StView>
+      <StView>imagea</StView>
     </StPost>
   );
 };
@@ -25,7 +25,7 @@ export default Post;
 
 const StPost = styled.div`
   max-width: 1920px;
-  min-width: 1080px;
+  min-width: 1020px;
   max-height: 1080px;
   min-height: 720px;
   display: flex;
