@@ -16,7 +16,7 @@ const Post = () => {
       </StNvHome>
       <StImg src="img/myGiraffe.png" alt="내기린_로고" />
 
-      <StView>imagea</StView>
+      <StView>imageaaa</StView>
     </StPost>
   );
 };
