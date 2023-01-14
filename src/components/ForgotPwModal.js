@@ -8,8 +8,9 @@ import ButtonDefault from './ButtonDefault'
 import { isModalGlobalTogglePw } from '../redux/modules/forgotPw'
 //style, images, etc
 import logo from '../images/logo.png'
-import {COLORS} from './StyleGlobal'
-
+import {COLORS} from '../style/StyleGlobal'
+import {IoMdCloseCircle} from 'react-icons/io'
+import '../css/style.css'
 
 
 const ForgotPwModal = () => {
@@ -34,7 +35,7 @@ const ForgotPwModal = () => {
     alert('클릭')
   }
 
-  const onClickCloseSignupModal=()=>{
+  const onClickCloseForgotPwModal=()=>{
     dispatch(isModalGlobalTogglePw(false))
     console.log('비밀번호 닫기 isModal : ', isModalTogglePw)
   }
@@ -64,8 +65,9 @@ const ForgotPwModal = () => {
             >비밀번호 변경</ButtonDefault>
           </StButtonBox>
         </StSignupModalInputForm>
+        <IoMdCloseCircle onClick={onClickCloseForgotPwModal} className="iconIoMdCloseCircle"></IoMdCloseCircle>
       </StSignupModalWrapBox>
-      <StModalDim onClick={onClickCloseSignupModal}></StModalDim>
+      <StModalDim onClick={onClickCloseForgotPwModal}></StModalDim>
     </StSignupModalWrap>
   )
 }
