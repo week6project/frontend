@@ -7,7 +7,7 @@ import useInput from '../hooks/useInput'
 import ButtonDefault from './ButtonDefault'
 import { isModalGlobalTogglePw } from '../redux/modules/forgotPw'
 //style, images, etc
-import logo from '../images/logo.png'
+import logo from '../images/myGiraffe.png'
 import {COLORS} from '../style/StyleGlobal'
 import {IoMdCloseCircle} from 'react-icons/io'
 import '../css/style.css'
@@ -25,10 +25,6 @@ const ForgotPwModal = () => {
 
   const {isModalTogglePw}=useSelector((state)=>state.forgotPw)
   
-
-  useEffect(()=>{
-    
-  })
   console.log('비밀번호 창 isModal : ', isModalTogglePw)
   const onSubmitSignup=(e)=>{
     e.preventDefault()
@@ -115,7 +111,7 @@ const StSignupModalWrapBox=styled.div`
   padding: 30px;
   background-color: #fff;
   position: absolute;
-  top: calc(50vh - 30%); 
+  top: calc(50vh - 35%); 
   left: calc(50vw - 15%);
   position: absolute;
   z-index: 1;
@@ -124,7 +120,7 @@ const StSignupModalWrapBox=styled.div`
 const StSignupModalLogo=styled.img.attrs({
   src: `${logo}`
 })`
-  width: 50px;
+  width: 120px;
 `
 
 

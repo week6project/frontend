@@ -1,52 +1,77 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector} from 'react-redux';
+import SignupModal from '../components/SignupModal'
+import ForgotPwModal from '../components/ForgotPwModal';
+import { isModalGlobalToggleSignup } from '../redux/modules/signup'
+import { isModalGlobalTogglePw } from '../redux/modules/forgotPw'
 
 //로그인 창
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
+
+  //회원가입, 비밀번호 변경
+  const {isModalToggleSignup} = useSelector((state)=>state.signup)
+  const {isModalTogglePw} = useSelector((state)=>state.forgotPw)
+
+  const onClickOpenSignup=()=>{
+    dispatch(isModalGlobalToggleSignup(true))
+    console.log('로그인 클릭 isModalOpen : ', isModalToggleSignup)
+  }
+  const onClickOpenForgotPw=()=>{
+    dispatch(isModalGlobalTogglePw(true))
+    console.log('비밀번호변경 isModalOpen : ', isModalTogglePw)
+  }
 
   return (
-    <StLogin>
-      {/* 임시버튼: 최종때는 헤더넣을 예정 */}
-      <StNvHome
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Home
-      </StNvHome>
-      <StForm name="LoginPage" method="POST">
-        <StImg src="img/myGiraffe.png" alt="내기린_로고" />
+    <>
+      <StLogin>
+        {/* 임시버튼: 최종때는 헤더넣을 예정 */}
+        <StNvHome
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Home
+        </StNvHome>
+        <StForm name="LoginPage" method="POST">
+          <StImg src="img/myGiraffe.png" alt="내기린_로고" />
 
-        <StIDPW>
-          <StH>ID</StH>
-          <StInput
-            type="text"
-            name="ID"
-            maxlength="10"
-            placeholder="작성자 이름을 입력해세요.(10자 이내)"
-          />
-        </StIDPW>
-        <StIDPW>
-          <StH>PW</StH>
-          <StInput
-            type="text"
-            name="password"
-            maxlength="10"
-            placeholder="비밀번호를 입력해주세요.(10자 이내)"
-          />
-        </StIDPW>
-        <StBtn>
-          <button>Social Login</button>
-          <StBtnRow>
-            <button>Login</button>
-            <button>Sign Up</button>
-          </StBtnRow>
-          <button>Forgot PW</button>
-        </StBtn>
-      </StForm>
-    </StLogin>
+          <StIDPW>
+            <StH>ID</StH>
+            <StInput
+              type="text"
+              name="ID"
+              maxlength="10"
+              placeholder="작성자 이름을 입력해세요.(10자 이내)"
+            />
+          </StIDPW>
+          <StIDPW>
+            <StH>PW</StH>
+            <StInput
+              type="text"
+              name="password"
+              maxlength="10"
+              placeholder="비밀번호를 입력해주세요.(10자 이내)"
+            />
+          </StIDPW>
+          <StBtn>
+            <button>Social Login</button>
+            <StBtnRow>
+              <button>Login</button>
+              <button onClick={onClickOpenSignup}>SignUp</button>
+              
+        
+            </StBtnRow>
+            <button onClick={onClickOpenForgotPw}>Forgot Pw 변경</button>
+          </StBtn>
+        </StForm>
+      </StLogin>
+      <SignupModal></SignupModal>
+      <ForgotPwModal></ForgotPwModal>
+    </>
   );
 };
 

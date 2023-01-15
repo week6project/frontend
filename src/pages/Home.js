@@ -1,15 +1,34 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useDispatch, useSelector} from 'react-redux';
+import SignupModal from '../components/SignupModal'
+import ForgotPwModal from '../components/ForgotPwModal';
+import { isModalGlobalToggleSignup } from '../redux/modules/signup'
+import { isModalGlobalTogglePw } from '../redux/modules/forgotPw'
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
+
+  //회원가입, 비밀번호변경
+  const {isModalToggleSignup} = useSelector((state)=>state.signup)
+  const {isModalTogglePw} = useSelector((state)=>state.forgotPw)
+
+  const onClickOpenSignup=()=>{
+    dispatch(isModalGlobalToggleSignup(true))
+    console.log('로그인 클릭 isModalOpen : ', isModalToggleSignup)
+  }
+  const onClickOpenForgotPw=()=>{
+    dispatch(isModalGlobalTogglePw(true))
+    console.log('비밀번호변경 isModalOpen : ', isModalTogglePw)
+  }
 
   return (
     <StHome>
       <Stform>
         <StImg src="img/myGiraffe.png" alt="내기린_로고" />
-        <StBtnForm>
+        <StBtnForm onSubmit={(e)=>e.preventDefault()}>
           <p>임시 버튼 : 최종때는 없앨 예정</p>
           <button
             onClick={() => {
@@ -27,6 +46,10 @@ const Home = () => {
           </button>
         </StBtnForm>
       </Stform>
+      <button onClick={onClickOpenSignup}>회원가입</button>
+      <button onClick={onClickOpenForgotPw}>비밀번호 변경</button>
+      <SignupModal></SignupModal>
+      <ForgotPwModal></ForgotPwModal>
     </StHome>
   );
 };
