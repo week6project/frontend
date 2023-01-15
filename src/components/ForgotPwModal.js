@@ -112,7 +112,7 @@ const StSignupModalWrapBox=styled.div`
   background-color: #fff;
   position: absolute;
   top: calc(50vh - 35%); 
-  left: calc(50vw - 15%);
+  left: calc(50vw - 12%);
   position: absolute;
   z-index: 1;
 
