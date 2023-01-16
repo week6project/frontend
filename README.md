@@ -6,6 +6,10 @@
 🖼️ 프로젝트 링크 
 ‼️ https://docs.google.com/document/d/1pAhNMQ9tC1oIWFjZ0gtivlsq8Z8nGtMuzWDmvvgEuPw/edit#heading=h.gyr8iu49yd0
 
+
+<img src = 'https://user-images.githubusercontent.com/114923190/212538368-3ff636eb-811c-4766-bb20-cb949110e16e.png' height = '700'>
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
