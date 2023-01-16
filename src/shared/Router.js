@@ -15,9 +15,11 @@ const Router = () => {
     <BrowserRouter>
       <Layout>
         <Routes>
+          {/* 웹에서는 소문자로~; */}
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Post" element={<Post />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/post" element={<Post />} />
         </Routes>
       </Layout>
     </BrowserRouter>

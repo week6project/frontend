@@ -3,7 +3,7 @@ import { DefaultContext } from 'react-icons'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 //style, images, etc
-import logo from '../images/logo.png'
+import logo from '../images/myGiraffe.png'
 
 
 const Header = () => {
@@ -24,12 +24,12 @@ const StHeaderWrap=styled.div`
     display: flex;
     padding: 20px;
     margin-bottom: 50px;
-    background-color: #e2e2e2;
+    background-color: #e0dcff;
 `
 const StHeaderLogoImg=styled.img.attrs({
     src: `${logo}`
 })`
-    width: 50px;
+    width: 100px;
     cursor:pointer;
 `
 

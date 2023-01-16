@@ -1,8 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import SignupModal from "../components/SignupModal";
+import ForgotPwModal from "../components/ForgotPwModal";
+import { isModalGlobalToggleSignup } from "../redux/modules/signup";
+import { isModalGlobalTogglePw } from "../redux/modules/forgotPw";
 
 //로그인 창
 const Login = () => {
+  const dispatch = useDispatch();
+
+  //회원가입, 비밀번호 변경
+  const { isModalToggleSignup } = useSelector((state) => state.signup);
+  const { isModalTogglePw } = useSelector((state) => state.forgotPw);
+
+  const onClickOpenSignup = () => {
+    dispatch(isModalGlobalToggleSignup(true));
+    console.log("로그인 클릭 isModalOpen : ", isModalToggleSignup);
+  };
+  const onClickOpenForgotPw = () => {
+    dispatch(isModalGlobalTogglePw(true));
+    console.log("비밀번호변경 isModalOpen : ", isModalTogglePw);
+  };
+
   const [LoginId, setLoginId] = useState("");
 
   const IsLoginId = (e) => {
@@ -21,40 +42,45 @@ const Login = () => {
   };
 
   return (
-    <StLogin>
-      <StForm name="LoginPage" method="POST">
-        <StImg src="img/myGiraffe.png" alt="내기린_로고" />
+    <>
+      <StLogin>
+        <StForm name="LoginPage" method="POST">
+          <StImg src="img/myGiraffe.png" alt="내기린_로고" />
 
-        <StIDPW>
-          <StH>ID</StH>
-          <StInput
-            type="text"
-            name="ID"
-            maxlength="10"
-            value={LoginId}
-            onChange={IsLoginId}
-          />
-        </StIDPW>
-        <StIDPW>
-          <StH>PW</StH>
-          <StInput
-            type="password"
-            name="password"
-            maxlength="10"
-            value={LoginPw}
-            onChange={IsLoginPw}
-          />
-        </StIDPW>
-        <StBtn>
-          <button>Social Login</button>
-          <StBtnRow>
-            <button>Login</button>
-            <button>Sign Up</button>
-          </StBtnRow>
-          <Stbutton>Forgot PW</Stbutton>
-        </StBtn>
-      </StForm>
-    </StLogin>
+          <StIDPW>
+            <StH>ID</StH>
+            <StInput
+              type="text"
+              name="ID"
+              maxlength="10"
+              value={LoginId}
+              onChange={IsLoginId}
+            />
+          </StIDPW>
+          <StIDPW>
+            <StH>PW</StH>
+            <StInput
+              type="text"
+              name="password"
+              maxlength="10"
+              value={LoginPw}
+              onChange={IsLoginPw}
+            />
+          </StIDPW>
+          <StBtn>
+            <button>Social Login</button>
+            <StBtnRow>
+              <button>Login</button>
+            </StBtnRow>
+          </StBtn>
+        </StForm>
+        <button onClick={onClickOpenSignup}>SignUp</button>
+        <button onClick={onClickOpenForgotPw}>Forgot Pw 변경</button>
+      </StLogin>
+
+      <SignupModal></SignupModal>
+      <ForgotPwModal></ForgotPwModal>
+    </>
   );
 };
 

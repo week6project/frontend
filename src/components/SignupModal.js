@@ -7,7 +7,7 @@ import useInput from '../hooks/useInput'
 import ButtonDefault from './ButtonDefault'
 import { isModalGlobalToggleSignup } from '../redux/modules/signup'
 //style, images, etc
-import logo from '../images/logo.png'
+import logo from '../images/myGiraffe.png'
 import {COLORS} from '../style/StyleGlobal'
 import {IoMdCloseCircle} from 'react-icons/io'
 import '../css/style.css'
@@ -25,10 +25,6 @@ const SignupModal = () => {
 
   const {isModalToggleSignup}=useSelector((state)=>state.signup)
   
-
-  useEffect(()=>{
-    
-  })
   console.log('회원가입 창 isModal : ', isModalToggleSignup)
   const onSubmitSignup=(e)=>{
     e.preventDefault()
@@ -117,8 +113,8 @@ const StSignupModalWrapBox=styled.div`
   padding: 30px;
   background-color: #fff;
   position: absolute;
-  top: calc(50vh - 35%); 
-  left: calc(50vw - 15%);
+  top: calc(50vh - 40%); 
+  left: calc(50vw - 12%);
   position: absolute;
   z-index: 1;
 
@@ -126,7 +122,7 @@ const StSignupModalWrapBox=styled.div`
 const StSignupModalLogo=styled.img.attrs({
   src: `${logo}`
 })`
-  width: 50px;
+  width: 120px;
 `
 
 
