@@ -56,8 +56,8 @@ const StPostsUl=styled.ul`
   padding: 20px;
   min-height: 400px;
   max-height: 600px;
-  overflow-y: auto;
   border: 1px solid ${COLORS.defaultBold};
+  overflow-y: auto;
     ::-webkit-scrollbar {
     width: 10px;
 }
@@ -75,7 +75,6 @@ const StPostsWrap=styled.div`
   max-width: 1300px;
   min-width: 380px;
   margin: 50px auto 0;
-
 `
 
 

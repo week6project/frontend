@@ -49,7 +49,7 @@ const SignupModal = () => {
     if(!regexId.test(value)){
       setIsId(false)
       console.log('setIsId : ', isId)
-      return setValidMessageId('한글, 영어, 숫자 / 10자 이내로 입력')
+      return setValidMessageId('❗ 한글, 영어, 숫자 / 10자 이내로 입력')
     } else{
       setIsId(true)
       console.log('setIsId : ', isId)
@@ -63,7 +63,7 @@ const SignupModal = () => {
     if(!regexNickname.test(value)){
       setIsNickname(false)
       console.log('setIsNickname : ', isNickname)
-      return setValidMessageNickname('한글, 영어, 숫자 / 10자 이내로 입력')
+      return setValidMessageNickname('❗ 한글, 영어, 숫자 / 10자 이내로 입력')
     } else{
       setIsNickname(true)
       console.log('setIsNickname : ', isNickname)
@@ -77,7 +77,7 @@ const SignupModal = () => {
     if(!regexEmail.test(value)){
       setIsEmail(false)
       console.log('setIsEmail : ', isEmail)
-      return setValidMessageEmail('@와 .을 포함한 이메일 형식으로 입력')
+      return setValidMessageEmail('❗ @와 .을 포함한 이메일 형식으로 입력')
     } else{
       setIsEmail(true)
       console.log('setIsEmail : ', isEmail)
@@ -91,7 +91,7 @@ const SignupModal = () => {
     if(!regexPassword.test(value)){
       setIsPassword(false)
       console.log('setIsPassword : ', isPassword)
-      return setValidMessagePassword('영어, 숫자 / 10자 이내로 입력')
+      return setValidMessagePassword('❗ 영어, 숫자 / 10자 이내로 입력')
     } else{
       setIsPassword(true)
       console.log('setIsPassword : ', isPassword)
@@ -104,7 +104,7 @@ const SignupModal = () => {
     if(valuePw !== value){
       setIsPasswordCheck(false)
       console.log('setIsPassword : ', isPasswordCheck)
-      return setValidMessagePasswordCheck('비밀번호가 다릅니다!')
+      return setValidMessagePasswordCheck('❗ 비밀번호가 다릅니다!')
     } else{
       setIsPasswordCheck(true)
       console.log('setIsPassword : ', isPasswordCheck)

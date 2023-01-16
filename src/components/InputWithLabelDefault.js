@@ -8,7 +8,7 @@ function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, input
     <>
       { labelText
       ? <StLabelWrap><StLabelDefault htmlfor={inputId}>{labelText}</StLabelDefault> 
-          {validMessage && <StValidMessageSpan>[ {validMessage} ]</StValidMessageSpan>}
+          {validMessage && <StValidMessageSpan> {validMessage}</StValidMessageSpan>}
       </StLabelWrap>
       : null
       }
