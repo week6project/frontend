@@ -10,6 +10,7 @@ import { isModalGlobalTogglePw } from "../redux/modules/forgotPw";
 //로그인 창
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
@@ -24,23 +25,35 @@ const Login = () => {
     console.log("비밀번호변경 isModalOpen : ", isModalTogglePw);
   };
 
-  const [LoginId, setLoginId] = useState("");
+  const [userId, setuserId] = useState("");
 
   const IsLoginId = (e) => {
     const curValue = e.currentTarget.value;
     const notId = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
     // 정규식에 역슬래시 적용이 안됨
-    setLoginId(curValue.replace(notId, ""));
+    setuserId(curValue.replace(notId, ""));
   };
-  const [LoginPw, setLoginPw] = useState("");
+  const [password, setpassword] = useState("");
 
   const IsLoginPw = (e) => {
     const curValue = e.currentTarget.value;
-    const notPw = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+    const notPw = /[~!@#$%";'^,&*\\()_+|</>=>`?:{[}]/g;
 
-    setLoginPw(curValue.replace(notPw, ""));
+    setpassword(curValue.replace(notPw, ""));
   };
+  const onLoginHandler = (user) => {
+    const newUser = {
+      //id: Date.now(),
+      userId,
+      password,
+    };
+    // dispatch(__postUsers(newUser));
 
+    console.log(user.name);
+
+    alert("환영합니다.");
+    navigate("/mainList");
+  };
   return (
     <>
       <StLogin>
@@ -53,29 +66,29 @@ const Login = () => {
               type="text"
               name="ID"
               maxlength="10"
-              value={LoginId}
+              value={userId}
               onChange={IsLoginId}
             />
           </StIDPW>
           <StIDPW>
             <StH>PW</StH>
             <StInput
-              type="text"
+              type="password"
               name="password"
               maxlength="10"
-              value={LoginPw}
+              value={password}
               onChange={IsLoginPw}
             />
           </StIDPW>
           <StBtn>
-            <button>Social Login</button>
-            <StBtnRow>
-              <button>Login</button>
-            </StBtnRow>
+            <button onClick={onLoginHandler}>Login</button>
           </StBtn>
         </StForm>
-        <button onClick={onClickOpenSignup}>SignUp</button>
-        <button onClick={onClickOpenForgotPw}>Forgot Pw 변경</button>
+        <button>Social Login</button>
+        <StBtnRow>
+          <button onClick={onClickOpenSignup}>SignUp</button>
+          <button onClick={onClickOpenForgotPw}>Forgot Pw 변경</button>
+        </StBtnRow>
       </StLogin>
 
       <SignupModal></SignupModal>
