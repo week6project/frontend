@@ -2,16 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, inputPaceholder, onChange, width, labelText}) {
+function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, inputPaceholder, 
+  onChange, onBlur, validMessage, width, labelText}) {
   return (
     <>
       { labelText
-      ? <StLabelDefault htmlfor={inputId}>{labelText}</StLabelDefault>
+      ? <StLabelWrap><StLabelDefault htmlfor={inputId}>{labelText}</StLabelDefault> 
+          {validMessage && <StValidMessageSpan>[ {validMessage} ]</StValidMessageSpan>}
+      </StLabelWrap>
       : null
       }
       <StInputDefault type={inputType} id={inputId} value={inputValue} 
       placeholder={inputPaceholder}
       onChange={onChange}
+      onBlur={onBlur}
       required
       autoFocus={autoFocus||null}
       width={width}
@@ -20,9 +24,15 @@ function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, input
   )
 }
 
-const StLabelDefault=styled.label`
-  display: block;
+
+const StValidMessageSpan=styled.span`
+  color:red;
+`
+const StLabelWrap=styled.span`
   margin-bottom: 10px;
+`
+const StLabelDefault=styled.label`
+  margin-right: 10px;
 `
 const StInputDefault=styled.input.attrs(props=>({
     type:props.type || 'text',
