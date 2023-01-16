@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 //로그인 창
 const Login = () => {
-  const navigate = useNavigate();
+  const [LoginId, setLoginId] = useState("");
+
+  const IsLoginId = (e) => {
+    const curValue = e.currentTarget.value;
+    const notId = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+    // 정규식에 역슬래시 적용이 안됨
+    setLoginId(curValue.replace(notId, ""));
+  };
+  const [LoginPw, setLoginPw] = useState("");
+
+  const IsLoginPw = (e) => {
+    const curValue = e.currentTarget.value;
+    const notPw = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+
+    setLoginPw(curValue.replace(notPw, ""));
+  };
 
   return (
     <StLogin>
-      {/* 임시버튼: 최종때는 헤더넣을 예정 */}
-      <StNvHome
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Home
-      </StNvHome>
       <StForm name="LoginPage" method="POST">
         <StImg src="img/myGiraffe.png" alt="내기린_로고" />
 
@@ -25,16 +31,18 @@ const Login = () => {
             type="text"
             name="ID"
             maxlength="10"
-            placeholder="작성자 이름을 입력해세요.(10자 이내)"
+            value={LoginId}
+            onChange={IsLoginId}
           />
         </StIDPW>
         <StIDPW>
           <StH>PW</StH>
           <StInput
-            type="text"
+            type="password"
             name="password"
             maxlength="10"
-            placeholder="비밀번호를 입력해주세요.(10자 이내)"
+            value={LoginPw}
+            onChange={IsLoginPw}
           />
         </StIDPW>
         <StBtn>
@@ -43,7 +51,7 @@ const Login = () => {
             <button>Login</button>
             <button>Sign Up</button>
           </StBtnRow>
-          <button>Forgot PW</button>
+          <Stbutton>Forgot PW</Stbutton>
         </StBtn>
       </StForm>
     </StLogin>
@@ -54,20 +62,13 @@ export default Login;
 
 const StLogin = styled.div`
   max-width: 1920px;
-  min-width: 1080px;
+  min-width: 800px;
   max-height: 1080px;
-  min-height: 720px;
+  min-height: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-// 임시 네비 홈버튼
-const StNvHome = styled.button`
-  position: absolute;
-  top: 0%;
-  left: 0%;
 `;
 
 const StForm = styled.form`
@@ -101,6 +102,8 @@ const StH = styled.h4`
 const StInput = styled.input`
   width: 150px;
   height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
 `;
 
 const StBtn = styled.div`
@@ -119,3 +122,10 @@ const StBtnRow = styled.div`
   justify-content: space-between;
   margin: 10px 0px 10px 0px;
 `;
+const Stbutton = styled.button`
+  margin-bottom: 20px;
+`;
+// const Stt = styled.div`
+//   display: flex;
+//   flex-direction: row;
+// `;
