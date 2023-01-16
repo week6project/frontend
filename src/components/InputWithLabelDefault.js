@@ -2,15 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, inputPaceholder, onChange, labelText}) {
+function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, inputPaceholder, onChange, width, labelText}) {
   return (
     <>
-      <StLabelDefault htmlfor={inputId}>{labelText}</StLabelDefault>
+      { labelText
+      ? <StLabelDefault htmlfor={inputId}>{labelText}</StLabelDefault>
+      : null
+      }
       <StInputDefault type={inputType} id={inputId} value={inputValue} 
       placeholder={inputPaceholder}
       onChange={onChange}
       required
       autoFocus={autoFocus||null}
+      width={width}
       />
     </>
   )
@@ -24,6 +28,7 @@ const StInputDefault=styled.input.attrs(props=>({
     type:props.type || 'text',
     size:props.size || '10'
 }))`
+  width: ${(props) => props.width || "auto"};
   height: 15px;
   padding: 10px;
   border: 1px solid #d2d2d2;

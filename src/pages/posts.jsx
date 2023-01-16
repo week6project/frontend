@@ -54,6 +54,7 @@ const StPostsUl=styled.ul`
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
+  min-height: 400px;
   max-height: 600px;
   overflow-y: auto;
   border: 1px solid ${COLORS.defaultBold};
