@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function ButtonDefault({bgColor, hoverBgColor, hoverFontColor, children}) {
+function ButtonDefault({bgColor, hoverBgColor, hoverFontColor, onClick, children}) {
   return (
     <StButtonDefault bgColor={bgColor} hoverBgColor={hoverBgColor} hoverFontColor={hoverFontColor}
+    onClick={onClick}
     >{children}
     </StButtonDefault>
   )
