@@ -1,9 +1,11 @@
 import React,{useState, useEffect}from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //component, hooks
+import PostsCard from '../components/PostsCard';
+import ButtonDefault from '../components/ButtonDefault';
 
 //style, etc
 import '../css/reset.css'
@@ -14,127 +16,64 @@ import {COLORS} from '../style/StyleGlobal'
 
 
 const Posts = () => {
+
+  const navigate=useNavigate()
+  const onClickNavPost=()=>{
+    navigate('/post')
+  }
+
   return (
     <StPostsWrap>
+      <StPostsButtonBox>
+        <ButtonDefault onClick={onClickNavPost} bgColor={COLORS.defaultLight} hoverBgColor={COLORS.defaultPoint}>문제내기</ButtonDefault>
+      </StPostsButtonBox>
       <StPostsUl>
-      <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
-        <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
-        <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
-        <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
-        <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
-        <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
-        <StPostsCard>
-          <Link to="/" className="postsCardLink">
-            <StPostsCardImg/>
-            <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
-            </StPostsInfoBox>
-          </Link>
-        </StPostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
+        <PostsCard></PostsCard>
       </StPostsUl>
     </StPostsWrap>
   )
 }
 
 
-const StPostsDifficulty=styled.span`
-  
-`
-const StPostsDate=styled.span`
-  margin-bottom: 10px;
-`
-const StPostsAuth=styled.span`
-  margin-bottom: 10px;
-`
-const StPostsInfoBox=styled.div`
+const StPostsButtonBox=styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: left;
-  width: calc(100% - 40px);
+  margin-bottom: 20px;
+  justify-content: right;
   padding: 0 20px;
-`
-const StPostsCardImg=styled.img.attrs({
-  src: `img/myGiraffe.png`
-})`
-  width: 80%;
-  border: 1px solid ${COLORS.defaultLight};
-  border-radius: 20px;
-  margin-bottom: 10px;
-`
-
-const StPostsCard=styled.li`
-  border: 1px solid ${COLORS.defaultLight};
-  border-radius: 20px;
-  width: 23.6%;
 `
 const StPostsUl=styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+  border: 1px solid ${COLORS.defaultBold};
+    ::-webkit-scrollbar {
+    width: 10px;
+}
+    ::-webkit-scrollbar-track {
+        background-color: #fa9370;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #f44408;
+        border-radius: 10px;
+    }
+
 `
 const StPostsWrap=styled.div`
-  border: 1px solid ${COLORS.defaultBold};
   max-width: 1300px;
   min-width: 380px;
-
-  margin: 0 auto;
+  margin: 50px auto 0;
 
 `
 
