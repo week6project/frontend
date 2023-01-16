@@ -7,7 +7,7 @@
 ‼️ https://docs.google.com/document/d/1pAhNMQ9tC1oIWFjZ0gtivlsq8Z8nGtMuzWDmvvgEuPw/edit#heading=h.gyr8iu49yd0
 
 
-<img src = 'https://user-images.githubusercontent.com/114923190/212538368-3ff636eb-811c-4766-bb20-cb949110e16e.png' height = '700'>
+<img width="775" alt="Screenshot 2023-01-16 at 10 44 09 AM" src="https://user-images.githubusercontent.com/114923190/212581451-ffa44ba1-7762-46f0-b694-01583d23ba67.png">
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
