@@ -7,7 +7,7 @@ import ForgotPwModal from "../components/ForgotPwModal";
 import { isModalGlobalToggleSignup } from "../redux/modules/signup";
 import { isModalGlobalTogglePw } from "../redux/modules/forgotPw";
 
-//로그인 창
+//로그인 창 수정중
 const Login = () => {
   const dispatch = useDispatch();
 
