@@ -60,7 +60,7 @@ const Login = () => {
           <StIDPW>
             <StH>PW</StH>
             <StInput
-              type="text"
+              type="password"
               name="password"
               maxlength="10"
               value={LoginPw}
@@ -69,13 +69,14 @@ const Login = () => {
           </StIDPW>
           <StBtn>
             <button>Social Login</button>
-            <StBtnRow>
-              <button>Login</button>
-            </StBtnRow>
+
+            <button>Login</button>
           </StBtn>
         </StForm>
-        <button onClick={onClickOpenSignup}>SignUp</button>
-        <button onClick={onClickOpenForgotPw}>Forgot Pw 변경</button>
+        <StBtnRow>
+          <button onClick={onClickOpenSignup}>SignUp</button>
+          <button onClick={onClickOpenForgotPw}>Forgot Pw 변경</button>
+        </StBtnRow>
       </StLogin>
 
       <SignupModal></SignupModal>

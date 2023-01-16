@@ -7,7 +7,7 @@ const Post = () => {
 
   const IsAnswer = (e) => {
     const curValue = e.currentTarget.value;
-    const notAnswer = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+    const notAnswer = /[~!@#$%";'^,&*()_+|</>=>`?:{[\\}]/g;
 
     setAnswer(curValue.replace(notAnswer, ""));
   };
