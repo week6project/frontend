@@ -1,16 +1,16 @@
-:root{
-    --color-point-orange: #ff5100;
+:root {
+  --color-point-orange: #ff5100;
 }
 
 /*회원가입*/
-.iconIoMdCloseCircle{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    color: #000;
+.iconIoMdCloseCircle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: #000;
 }
 .iconIoMdCloseCircle:hover{
     color: var(--color-point-orange);

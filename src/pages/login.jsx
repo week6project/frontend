@@ -1,26 +1,24 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector} from 'react-redux';
-import SignupModal from '../components/SignupModal'
-import ForgotPwModal from '../components/ForgotPwModal';
-import { isModalGlobalToggleSignup } from '../redux/modules/signup'
-import { isModalGlobalTogglePw } from '../redux/modules/forgotPw'
-
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SignupModal from "../components/SignupModal";
+import ForgotPwModal from "../components/ForgotPwModal";
+import { isModalGlobalToggleSignup } from "../redux/modules/signup";
+import { isModalGlobalTogglePw } from "../redux/modules/forgotPw";
 
 function Login() {
+  const dispatch = useDispatch();
 
-  const dispatch=useDispatch()
+  const { isModalToggleSignup } = useSelector((state) => state.signup);
+  const { isModalTogglePw } = useSelector((state) => state.forgotPw);
 
-  const {isModalToggleSignup} = useSelector((state)=>state.signup)
-  const {isModalTogglePw} = useSelector((state)=>state.forgotPw)
-
-  const onClickOpenSignup=()=>{
-    dispatch(isModalGlobalToggleSignup(true))
-    console.log('로그인 클릭 isModalOpen : ', isModalToggleSignup)
-  }
-  const onClickOpenForgotPw=()=>{
-    dispatch(isModalGlobalTogglePw(true))
-    console.log('비밀번호변경 isModalOpen : ', isModalTogglePw)
-  }
+  const onClickOpenSignup = () => {
+    dispatch(isModalGlobalToggleSignup(true));
+    console.log("로그인 클릭 isModalOpen : ", isModalToggleSignup);
+  };
+  const onClickOpenForgotPw = () => {
+    dispatch(isModalGlobalTogglePw(true));
+    console.log("비밀번호변경 isModalOpen : ", isModalTogglePw);
+  };
 
   return (
     <>
@@ -29,8 +27,7 @@ function Login() {
       <SignupModal></SignupModal>
       <ForgotPwModal></ForgotPwModal>
     </>
-  )
+  );
 }
 
-
-export default Login
+export default Login;
