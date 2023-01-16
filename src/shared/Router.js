@@ -6,6 +6,8 @@ import Layout from "./Layout";
 import Posts from "../pages/posts";
 import Post from "../pages/Post";
 import Home from "../pages/Home";
+import PostsDetail from '../pages/postsDetail';
+
 
 // 2. Router 라는 함수를 만들고 아래와 같이 작성합니다.
 //BrowserRouter를 Router로 감싸는 이유는,
@@ -19,6 +21,7 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:postId" element={<PostsDetail />} />
           <Route path="/post" element={<Post />} />
         </Routes>
       </Layout>

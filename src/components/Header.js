@@ -23,7 +23,6 @@ const Header = () => {
 const StHeaderWrap=styled.div`
     display: flex;
     padding: 20px;
-    margin-bottom: 50px;
     background-color: #e0dcff;
 `
 const StHeaderLogoImg=styled.img.attrs({
