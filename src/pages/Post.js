@@ -7,13 +7,14 @@ const Post = () => {
 
   const IsAnswer = (e) => {
     const curValue = e.currentTarget.value;
-    const notAnswer = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+    const notAnswer = /[~!@#$%";'^,&*()_+|</>=>`?:{[\\}]/g;
 
     setAnswer(curValue.replace(notAnswer, ""));
   };
 
   // 힌트입력 특수문자제외
   const [Hint, setHint] = useState("");
+  const [imageSrc, setImageSrc] = useState();
 
   const IsHint = (e) => {
     const curValue = e.currentTarget.value;
@@ -21,18 +22,51 @@ const Post = () => {
 
     setHint(curValue.replace(notHint, ""));
   };
+  //미리보기
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+  };
+
   return (
     <StPost>
       <Wrap>
-        <StIn id="imageEdit">
-          <input
-            type="file"
-            id="image_uploads"
-            name="image"
-            accept="image/*"
-            //onChange={requestImg}
-          ></input>
-        </StIn>
+        {imageSrc ? (
+          <>
+            <StPrivew>
+              {imageSrc && <Stimg src={imageSrc} alt="preview-img" />}
+            </StPrivew>
+            <StIn2 id="imageEdit">
+              <input
+                type="file"
+                id="preview"
+                name="image"
+                accept="image/*"
+                onChange={(e) => {
+                  encodeFileToBase64(e.target.files[0]);
+                }}
+              />
+            </StIn2>
+          </>
+        ) : (
+          <StIn id="imageEdit">
+            <input
+              type="file"
+              id="preview"
+              name="image"
+              accept="image/*"
+              onChange={(e) => {
+                encodeFileToBase64(e.target.files[0]);
+              }}
+            />
+          </StIn>
+        )}
       </Wrap>
       <StBox>
         <StData>
@@ -99,6 +133,10 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: center;
 `;
+const Stimg = styled.img`
+  width: 400px;
+  height: 400px;
+`;
 
 const StIn = styled.div`
   display: flex;
@@ -137,4 +175,12 @@ const StSelect = styled.select`
   border: 2px solid black;
   border-radius: 5px;
   margin: 14px;
+`;
+const StPrivew = styled.div``;
+const StIn2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: -100px;
 `;
