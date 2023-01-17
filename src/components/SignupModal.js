@@ -15,8 +15,6 @@ import "../css/style.css";
 
 const SignupModal = () => {
   const dispatch = useDispatch();
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //useinput
