@@ -1,19 +1,59 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id": 0,
+      "userId": "asdf",
+      "password": "qwer1234"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 1673938170268,
+      "userId": "asdf",
+      "password": "qwer1234"
+    },
+    {
+      "id": 1673938420028,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673938495868,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673940066663,
+      "userId": "asdf",
+      "password": "qwer1234"
+    },
+    {
+      "id": 1673940112847,
+      "userId": "asdf",
+      "password": "qwer1234"
+    },
+    {
+      "id": 1673940170788,
+      "userId": "wwwq",
+      "password": "qweqweqwe"
+    },
+    {
+      "id": 1673941280152,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673941316762,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673941474224,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673941619415,
+      "userId": "as",
+      "password": ""
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
