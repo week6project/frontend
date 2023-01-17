@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 //component, hooks
 import PostsCard from '../components/PostsCard';
 import ButtonDefault from '../components/ButtonDefault';
+import { __getPosts } from '../redux/modules/postsSlice';
 
 //style, etc
 import '../css/reset.css'
@@ -16,6 +17,14 @@ import {COLORS} from '../style/StyleGlobal'
 
 
 const Posts = () => {
+
+  const dispatch = useDispatch()
+
+  const { isLoading, error, posts } = useSelector((state) => state.postsSlice);
+
+  useEffect(()=>{
+    dispatch(__getPosts())
+  }, [dispatch])
 
   const navigate=useNavigate()
   const onClickNavPost=()=>{
@@ -28,20 +37,38 @@ const Posts = () => {
         <ButtonDefault onClick={onClickNavPost} bgColor={COLORS.defaultLight} hoverBgColor={COLORS.defaultPoint}>문제내기</ButtonDefault>
       </StPostsButtonBox>
       <StPostsUl>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
-        <PostsCard></PostsCard>
+        {isLoading && <StCenterMessage>열심히 데이터를 불러오는 중이에요~!</StCenterMessage>}
+        {error && <StCenterMessage>에러가 났네요! 다시 시도해주세요!</StCenterMessage>}
+        {posts.map((post)=>{ //정답자 없는 문제 출력
+          return(
+          !post.inputAnswer
+          && <PostsCard key={post.postNo} image={post.image} nickname={post.nickname} createdAt={post.createdAt}
+            difficult={post.difficult}
+            ></PostsCard>
+           )
+        })}
+        {posts.map((post)=>{ //정답자 있는 문제 출력
+          return(
+            post.inputAnswer
+            && <PostsCard key={post.postNo} image={post.image} nickname={post.nickname} createdAt={post.createdAt}
+              difficult={post.difficult} inputAnswer={post.inputAnswer}
+              ></PostsCard>
+          )
+        })}
       </StPostsUl>
     </StPostsWrap>
   )
 }
 
+const StCenterMessage=styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  font-weight: bold;
+  font-size: 20px;
+`
 
 const StPostsButtonBox=styled.div`
   display: flex;
@@ -72,7 +99,7 @@ const StPostsUl=styled.ul`
 
 `
 const StPostsWrap=styled.div`
-  max-width: 1300px;
+  max-width: 1400px;
   min-width: 380px;
   margin: 50px auto 0;
 `

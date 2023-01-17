@@ -9,23 +9,33 @@ import '../css/style.css'
 import {COLORS} from '../style/StyleGlobal'
 
 
-const PostsCard = () => {
-
+const PostsCard = ({image, nickname, createdAt, difficult, inputAnswer}) => {
+  const dateEdit = createdAt.slice(0, 10)
+  const star = '⭐'.repeat(difficult)
   return (
-        <StPostsCard>
+        <StPostsCard className={inputAnswer && 'inputAnswer-true'}>
           <Link to="/" className="postsCardLink">
-            <StPostsCardImg />
+            {inputAnswer
+            && <StIconInputAnswer>✔</StIconInputAnswer>
+            }
+            <StPostsCardImg src={image} />
             <StPostsInfoBox>
-              <StPostsAuth>출제자 : 가나다라마바사아자차</StPostsAuth>
-              <StPostsDate>출제일 : 2023-01-01</StPostsDate>
-              <StPostsDifficulty>난이도 : ⭐⭐⭐⭐⭐</StPostsDifficulty>
+              <StPostsAuth>출제자 : {nickname}</StPostsAuth>
+              <StPostsDate>출제일 : {dateEdit}</StPostsDate>
+              <StPostsDifficulty>난이도 : {star}</StPostsDifficulty>
             </StPostsInfoBox>
           </Link>
         </StPostsCard>
   )
 }
 
-
+const StIconInputAnswer=styled.span`
+  color: ${COLORS.defaultOrange};
+  font-size: 30px;
+  position: absolute;
+  left: 5px;
+  top: -2px;
+`
 const StPostsDifficulty=styled.span`
   
 `
@@ -55,8 +65,10 @@ const StPostsCardImg=styled.img.attrs(props=>({
 const StPostsCard=styled.li`
   border: 1px solid ${COLORS.defaultLight};
   border-radius: 20px;
-  width: 23.6%;
+  width: 18.6%;
   min-width: 210px;
+  height: 290px;
+  position: relative;
   :hover{
     background-color: ${COLORS.defaultLight};
   }
