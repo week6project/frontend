@@ -214,7 +214,6 @@ const StSignupModalWrapBox=styled.div`
   left: calc(50vw - 12%);
   position: absolute;
   z-index: 1;
-
 `
 const StSignupModalLogo=styled.img.attrs({
   src: `${logo}`
