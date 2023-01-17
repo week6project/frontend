@@ -261,8 +261,8 @@ const StSignupModalWrapBox = styled.div`
   position: absolute;
   z-index: 1;
 `;
-const StSignupModalLogo = styled.img.attrs({
-  src: `${logo}`,
+const StSignupModalLogo=styled.img.attrs({
+  src: `${logo}`
 })`
   width: 120px;
 `;
