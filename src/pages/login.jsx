@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-//테스트중
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SignupModal from "../components/SignupModal";
@@ -36,6 +35,7 @@ const Login = () => {
   const IsLoginId = (e) => {
     const curValue = e.currentTarget.value;
     const notId = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+
     // 정규식에 역슬래시 적용이 안됨
     setuserId(curValue.replace(notId, ""));
   };
@@ -45,9 +45,13 @@ const Login = () => {
   const IsLoginPw = (e) => {
     const curValue = e.currentTarget.value;
     const notPw = /[~!@#$%";'^,&*\\()_+|</>=>`?:{[}]/g;
-
     setpassword(curValue.replace(notPw, ""));
+    // setpassword(curValue.filter(!notPw));
+    // alert("패스워드 형식이 일치하지 않습니다.");
   };
+
+  //요청보낼때 헤더에 미들웨어 요청할때 넣어주기 로컬스토리지에 담아봐라~
+  // headers["Authorization"] = `Bearer ${accessToken}`
 
   const onLoginHandler = (event) => {
     event.preventDefault();
