@@ -23,9 +23,19 @@ const Post = () => {
     setHint(curValue.replace(notHint, ""));
   };
   //미리보기
-  const encodeFileToBase64 = (fileBlob) => {
+  const encodeFileToBase64 = async (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
+    //   const formData= new FormData();
+    //   formData.append("image",fileBlob)
+    //   try {
+    //     const imageRes = await axios.post(`localhost:3000/image`, formData);
+    //   } catch (error) {
+    //     console.log(error);
+    //     alert('server error');
+    //   }
+    // };
+
     return new Promise((resolve) => {
       reader.onload = () => {
         setImageSrc(reader.result);
