@@ -15,8 +15,6 @@ import "../css/style.css";
 
 const SignupModal = () => {
   const dispatch = useDispatch();
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //useinput
@@ -263,8 +261,8 @@ const StSignupModalWrapBox = styled.div`
   position: absolute;
   z-index: 1;
 `;
-const StSignupModalLogo = styled.img.attrs({
-  src: `${logo}`,
+const StSignupModalLogo=styled.img.attrs({
+  src: `${logo}`
 })`
   width: 120px;
 `;
