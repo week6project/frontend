@@ -21,7 +21,7 @@ const Posts = () => {
   const dispatch = useDispatch()
 
   const { isLoading, error, posts } = useSelector((state) => state.postsSlice);
-
+  console.log('posts: ', posts)
   useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
     dispatch(__getPosts())
   }, [dispatch])

@@ -13,7 +13,7 @@ export const __getPostDetail= createAsyncThunk(
   "posts/GET_POST_DETAIL",
   async (payload, thunkAPI) => {
     try{
-      const {data} = await axios.get(`${serverUrl}/data/${payload}`)
+      const {data} = await axios.get(`${serverUrl}/posts/${payload}`)
       console.log('상세 : ', data)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){

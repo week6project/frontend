@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { serverUrl } from ".";
+
+axios.defaults.withCredentials = true;
+
+
 // Initial State
 const initialState = {
   users: [],
@@ -13,12 +18,15 @@ export const __postUsers = createAsyncThunk(
     //console.log("payload=", payload);
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/users/",
+        `${serverUrl}/user/login`,
         //"http://prachang.shop/api/users/",
         payload,
-      );
-      console.log("payload=", payload);
-      console.log("data=", data);
+      ).then(res => {
+        const token = res.headers.authorization
+        localStorage.setItem('token', token);
+        // 가져오기 코드 const tokenLocal = localStorage.getItem('token');
+        return res;
+      });
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       //console.log(error);
