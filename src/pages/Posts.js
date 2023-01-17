@@ -22,12 +22,12 @@ const Posts = () => {
 
   const { isLoading, error, posts } = useSelector((state) => state.postsSlice);
 
-  useEffect(()=>{
+  useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
     dispatch(__getPosts())
   }, [dispatch])
 
   const navigate=useNavigate()
-  const onClickNavPost=()=>{
+  const onClickNavPost=()=>{ //문제내기 버튼 클릭시 글작성 페이지로 이동
     navigate('/post')
   }
 
@@ -42,7 +42,7 @@ const Posts = () => {
         {posts.map((post)=>{ //정답자 없는 문제 출력
           return(
           !post.inputAnswer
-          && <PostsCard key={post.postNo} image={post.image} nickname={post.nickname} createdAt={post.createdAt}
+          && <PostsCard key={post.postNo} postNo={post.postNo} image={post.image} nickname={post.nickname} createdAt={post.createdAt}
             difficult={post.difficult}
             ></PostsCard>
            )
@@ -50,7 +50,7 @@ const Posts = () => {
         {posts.map((post)=>{ //정답자 있는 문제 출력
           return(
             post.inputAnswer
-            && <PostsCard key={post.postNo} image={post.image} nickname={post.nickname} createdAt={post.createdAt}
+            && <PostsCard key={post.postNo} postNo={post.postNo} image={post.image} nickname={post.nickname} createdAt={post.createdAt}
               difficult={post.difficult} inputAnswer={post.inputAnswer}
               ></PostsCard>
           )

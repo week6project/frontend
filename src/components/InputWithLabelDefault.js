@@ -3,14 +3,14 @@ import styled from 'styled-components'
 
 
 function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, inputPaceholder, 
-  onChange, onBlur, validMessage, width, labelText}) {
+  onChange, onBlur, validMessage, width, labelText, className, inputRef}) {
   return (
     <>
       { labelText
       ? <StLabelWrap><StLabelDefault htmlfor={inputId}>{labelText}</StLabelDefault> 
           {validMessage && <StValidMessageSpan> {validMessage}</StValidMessageSpan>}
       </StLabelWrap>
-      : null
+      : validMessage && <StValidMessageSpan> {validMessage}</StValidMessageSpan>
       }
       <StInputDefault type={inputType} id={inputId} value={inputValue} 
       placeholder={inputPaceholder}
@@ -19,6 +19,8 @@ function InputWithLabelDefault({autoFocus, inputType, inputId, inputValue, input
       required
       autoFocus={autoFocus||null}
       width={width}
+      className={className||null}
+      ref={inputRef}
       />
     </>
   )
