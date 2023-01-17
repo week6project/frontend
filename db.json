@@ -1,4 +1,85 @@
 {
+  "data": [
+    {
+      "id": 1,
+      "postId": 11,
+      "postNo": 1,
+      "userNo": 2,
+      "nickname": "정답자징징이",
+      "image": "https://i.imgur.com/7gpx7xw.png",
+      "inputAnswer": true,
+      "difficult": 3,
+      "createdAt": "2022-07-25T07:45:56.000Z",
+      "inputHint": "힌트는 OOO",
+      "passedPeople": ["김짱구", "티니핑", "라이언", "펭수찡"]
+    },
+    {
+      "id": 2,
+      "postId": 12,
+      "postNo": 2,
+      "userNo": 3,
+      "nickname": "가나다라마바사아자차",
+      "image": "https://i.imgur.com/7gpx7xw.png",
+      "inputAnswer": false,
+      "difficult": 5,
+      "createdAt": "2022-07-22T07:45:56.000Z",
+      "inputHint": "힌트는 222",
+      "passedPeople": ["김짱구2", "티니핑2", "라이언2", "펭수찡2"]
+    },
+    {
+      "id": 3,
+      "postId": 13,
+      "postNo": 3,
+      "userNo": 4,
+      "nickname": "닉",
+      "image": "https://i.imgur.com/7gpx7xw.png",
+      "inputAnswer": false,
+      "difficult": 1,
+      "createdAt": "2022-07-22T07:45:56.000Z",
+      "inputHint": "힌트는 333",
+      "passedPeople": ["김짱구3", "티니핑3", "라이언3", "펭수찡3"]
+    },
+    {
+      "id": 4,
+      "postId": 14,
+      "postNo": 4,
+      "userNo": 5,
+      "nickname": "닉네임",
+      "image": "https://i.imgur.com/7gpx7xw.png",
+      "inputAnswer": true,
+      "difficult": 2,
+      "createdAt": "2023-01-17T07:45:56.000Z",
+      "inputHint": "힌트는 444",
+      "passedPeople": ["김짱구4", "티니핑4", "라이언4", "펭수찡4"]
+    },
+    {
+      "id": 5,
+      "postId": 15,
+      "postNo": 5,
+      "userNo": 6,
+      "nickname": "정답자스펀지밥",
+      "image": "https://i.imgur.com/7gpx7xw.png",
+      "inputAnswer": true,
+      "difficult": 5,
+      "createdAt": "2023-01-17T07:45:56.000Z",
+      "inputHint": "힌트는 555",
+      "passedPeople": ["김짱구5", "티니핑5", "라이언5", "펭수찡5"]
+    },
+    {
+      "id": 6,
+      "postId": 16,
+      "postNo": 6,
+      "userNo": 7,
+      "nickname": "문제푸는스펀지밥",
+      "image": "https://i.imgur.com/7gpx7xw.png",
+      "inputAnswer": false,
+      "difficult": 5,
+      "createdAt": "2023-01-17T07:45:56.000Z",
+      "inputHint": "힌트는 666",
+      "passedPeople": ["김짱구6", "티니핑6", "라이언6", "펭수찡6"]
+    }
+  ],
+
   "users": [
     {
       "id": 0,

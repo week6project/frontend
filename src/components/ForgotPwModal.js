@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 //component, hooks
 import InputWithLabelDefault from "./InputWithLabelDefault";
 import useInput from "../hooks/useInput";
@@ -14,26 +16,103 @@ import "../css/style.css";
 
 const ForgotPwModal = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  //useinput
   const [ValueId, onChangeInputValueId, setValueId] = useInput("");
-  const [valueNickname, onChangeInputValueNickname, setValueNickname] =
-    useInput("");
   const [valueEmail, onChangeInputValueEmail, setValueEmail] = useInput("");
   const [valuePw, onChangeInputValuePw, setValuePw] = useInput("");
   const [valuePwCheck, onChangeInputValuePwCheck, setValuePwCheck] =
     useInput("");
 
+  //상태 메세지
+  const [validMessageId, setValidMessageId] = useState("");
+  const [validMessageEmail, setValidMessageEmail] = useState("");
+  const [validMessagePassword, setValidMessagePassword] = useState("");
+  const [validMessagePasswordCheck, setValidMessagePasswordCheck] =
+    useState("");
+
+  //유효성검사
+  const [isId, setIsId] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordCheck, setIsPasswordCheck] = useState(false);
+
+  //Modal Mode
   const { isModalTogglePw } = useSelector((state) => state.forgotPw);
 
-  //console.log('비밀번호 창 isModal : ', isModalTogglePw)
-  const onSubmitSignup = (e) => {
+  const onBlurSignupInputId = (e) => {
+    //유효성 검사 아이디
+    const regexId = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,10}$/;
+    let { value } = e.target;
+    if (!regexId.test(value)) {
+      setIsId(false);
+      console.log("setIsId : ", isId);
+      return setValidMessageId("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
+    } else {
+      setIsId(true);
+      console.log("setIsId : ", isId);
+      return setValidMessageId("");
+    }
+  };
+
+  const onBlurSignupInputEmail = (e) => {
+    //유효성 검사 이메일
+    const regexEmail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+    let { value } = e.target;
+    if (!regexEmail.test(value)) {
+      setIsEmail(false);
+      console.log("setIsEmail : ", isEmail);
+      return setValidMessageEmail("❗ @와 .을 포함한 이메일 형식으로 입력");
+    } else {
+      setIsEmail(true);
+      console.log("setIsEmail : ", isEmail);
+      return setValidMessageEmail("");
+    }
+  };
+
+  const onBlurSignupInputPassword = (e) => {
+    //유효성 검사 비밀번호
+    const regexPassword = /^[a-z|A-Z|0-9|]{1,10}$/;
+    let { value } = e.target;
+    if (!regexPassword.test(value)) {
+      setIsPassword(false);
+      console.log("setIsPassword : ", isPassword);
+      return setValidMessagePassword("❗ 영어, 숫자 / 10자 이내로 입력");
+    } else {
+      setIsPassword(true);
+      console.log("setIsPassword : ", isPassword);
+      return setValidMessagePassword("");
+    }
+  };
+  const onBlurSignupInputPasswordCheck = (e) => {
+    //유효성 검사 비밀번호 체크
+    // const regexPasswordCheck=/^[a-z|A-Z|0-9|]{1,10}$/
+    let { value } = e.target;
+    if (valuePw !== value) {
+      setIsPasswordCheck(false);
+      console.log("setIsPassword : ", isPasswordCheck);
+      return setValidMessagePasswordCheck("❗ 비밀번호가 다릅니다!");
+    } else {
+      setIsPasswordCheck(true);
+      console.log("setIsPassword : ", isPasswordCheck);
+      return setValidMessagePasswordCheck("");
+    }
+  };
+
+  const onSubmitForgot = (e) => {
     e.preventDefault();
-    alert("클릭");
+    if (isId && isEmail && isPassword && isPasswordCheck) {
+      alert("로그인 성공!");
+      navigate("/posts");
+    } else {
+      return false;
+    }
   };
 
   const onClickCloseForgotPwModal = () => {
     dispatch(isModalGlobalTogglePw(false));
-    //console.log('비밀번호 닫기 isModal : ', isModalTogglePw)
+    console.log("비밀번호 닫기 isModal : ", isModalTogglePw);
   };
 
   //본문
@@ -44,7 +123,7 @@ const ForgotPwModal = () => {
           <StSignupModalLogo></StSignupModalLogo>
           <StForgotPwModalInfo>비밀번호 변경</StForgotPwModalInfo>
         </StSignupModalH2>
-        <StSignupModalInputForm onSubmit={onSubmitSignup}>
+        <StSignupModalInputForm onSubmit={onSubmitForgot}>
           <StSignupModalInputFormBox>
             <InputWithLabelDefault
               autoFocus="autofocus"
@@ -52,6 +131,8 @@ const ForgotPwModal = () => {
               inputId="signupModalInputId"
               inputValue={ValueId}
               onChange={onChangeInputValueId}
+              onBlur={onBlurSignupInputId}
+              validMessage={validMessageId}
               labelText="아이디"
               inputPaceholder={"한글,영어,숫자/ 10자이내"}
             />
@@ -60,14 +141,18 @@ const ForgotPwModal = () => {
               inputId="signupModalInputEmail"
               inputValue={valueEmail}
               onChange={onChangeInputValueEmail}
+              onBlur={onBlurSignupInputEmail}
+              validMessage={validMessageEmail}
               labelText="이메일"
-              inputPaceholder={"@과.com를 포함한 이메일 형식"}
+              inputPaceholder={"@와.을 포함한 이메일 형식"}
             />
             <InputWithLabelDefault
               inputType="password"
               inputId="signupModalInputPw"
               inputValue={valuePw}
               onChange={onChangeInputValuePw}
+              onBlur={onBlurSignupInputPassword}
+              validMessage={validMessagePassword}
               labelText="비밀번호"
               inputPaceholder={"영어,숫자/ 10자이내"}
             />
@@ -76,6 +161,8 @@ const ForgotPwModal = () => {
               inputId="signupModalInputPwCheck"
               inputValue={valuePwCheck}
               onChange={onChangeInputValuePwCheck}
+              onBlur={onBlurSignupInputPasswordCheck}
+              validMessage={validMessagePasswordCheck}
               labelText="비밀번호 확인"
               inputPaceholder={"비밀번호 재입력"}
             />

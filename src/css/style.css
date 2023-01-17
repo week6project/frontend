@@ -20,10 +20,41 @@
 /*메인 목록*/
 .postsCardLink{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     align-items: center;
     padding: 12px;
     text-decoration: none;
     color: #000;
+    height: 100%;
+}
+
+/*메인 목록 카드*/
+.inputAnswer-true{
+  background-color: #b3b3b3;
+}
+.inputAnswer-true img{
+  border: 1px solid #b3b3b3;
+}
+.inputAnswer-true:hover{
+  background-color: #a0a0a0 !important;
+}
+
+/*글 상세*/
+.postDetailInputAnswer{
+  margin-top: 10px;
+}
+
+/*이전 페이지로 이동 아이콘*/
+.prevIcon{
+  position: absolute;
+  left: -20px;
+  top: -32px;
+  color: var(--color-point-orange);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.prevIcon:hover{
+  color: var(--color-defaultLight);
 }
