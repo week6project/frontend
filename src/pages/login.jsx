@@ -77,7 +77,7 @@ const Login = () => {
     if (userId === userId) {
       if (password === password) {
         alert(`${userId}님 환영합니다.`);
-        //navigate("/");
+        navigate("/posts");
       } else {
         alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
       }
