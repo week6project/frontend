@@ -1,19 +1,58 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "data": [
+      {
+        "postNo": 1,
+        "userNo": 2,
+        "nickname": "정답자징징이",
+        "image": "https://i.imgur.com/7gpx7xw.png",
+        "inputAnswer": true,
+        "difficult": 3,
+        "createdAt": "2022-07-25T07:45:56.000Z"
+      },
+      {
+        "postNo": 2,
+        "userNo": 3,
+        "nickname": "가나다라마바사아자차",
+        "image": "https://i.imgur.com/7gpx7xw.png",
+        "inputAnswer": false,
+        "difficult": 5,
+        "createdAt": "2022-07-22T07:45:56.000Z"
+      },
+      {
+        "postNo": 3,
+        "userNo": 4,
+        "nickname": "닉",
+        "image": "https://i.imgur.com/7gpx7xw.png",
+        "inputAnswer": false,
+        "difficult": 1,
+        "createdAt": "2022-07-22T07:45:56.000Z"
+      },
+      {
+        "postNo": 4,
+        "userNo": 5,
+        "nickname": "닉네임",
+        "image": "https://i.imgur.com/7gpx7xw.png",
+        "inputAnswer": true,
+        "difficult": 2,
+        "createdAt": "2023-01-17T07:45:56.000Z"
+      },
+      {
+        "postNo": 5,
+        "userNo": 6,
+        "nickname": "정답자스펀지밥",
+        "image": "https://i.imgur.com/7gpx7xw.png",
+        "inputAnswer": true,
+        "difficult": 5,
+        "createdAt": "2023-01-17T07:45:56.000Z"
+      },
+      {
+        "postNo": 6,
+        "userNo": 7,
+        "nickname": "문제푸는스펀지밥",
+        "image": "https://i.imgur.com/7gpx7xw.png",
+        "inputAnswer": false,
+        "difficult": 5,
+        "createdAt": "2023-01-17T07:45:56.000Z"
+      }
+  ]
 }
