@@ -11,12 +11,12 @@ const initialState = {
 export const __getPosts = createAsyncThunk(
   "posts/GET_POSTS",
   async (payload, thunkAPI) => {
-    try {
-      const { data } = await axios.get(`${serverUrl}/posts`);
-      console.log("asd", data);
-      return thunkAPI.fulfillWithValue(data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+    try{
+      const {data} = await axios.get(`${serverUrl}/posts`)
+      console.log('data : ', data)
+      return thunkAPI.fulfillWithValue(data)
+    }catch(error){
+      return thunkAPI.rejectWithValue(error)
     }
   },
 );

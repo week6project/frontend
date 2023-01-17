@@ -19,16 +19,16 @@ const Posts = () => {
   const { isLoading, error } = useSelector((state) => state.postsSlice);
   const { posts } = useSelector((state) => state.postsSlice.data);
 
-  useEffect(() => {
-    //페이지 렌더링 후 posts 목록 가져오기
-    dispatch(__getPosts());
-  }, [dispatch]);
+  //console.log('posts: ', posts)
+  useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
+    dispatch(__getPosts())
+  }, [dispatch])
 
-  const navigate = useNavigate();
-  const onClickNavPost = () => {
-    //문제내기 버튼 클릭시 글작성 페이지로 이동
-    navigate("/post");
-  };
+  const navigate=useNavigate()
+  const onClickNavPost=()=>{ //문제내기 버튼 클릭시 글작성 페이지로 이동
+    navigate('/post')
+  }
+
 
   return (
     <StPostsWrap>
