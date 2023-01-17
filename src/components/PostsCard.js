@@ -9,12 +9,12 @@ import '../css/style.css'
 import {COLORS} from '../style/StyleGlobal'
 
 
-const PostsCard = ({image, nickname, createdAt, difficult, inputAnswer}) => {
-  const dateEdit = createdAt.slice(0, 10)
-  const star = '⭐'.repeat(difficult)
+const PostsCard = ({postNo, image, nickname, createdAt, difficult, inputAnswer}) => {
+  const dateEdit = createdAt.slice(0, 10) //날짜 형식에 맞게 가공
+  const star = '⭐'.repeat(difficult) //난이도 수치에 맞게 별 모양 출력
   return (
         <StPostsCard className={inputAnswer && 'inputAnswer-true'}>
-          <Link to="/" className="postsCardLink">
+          <Link to={`/posts/${postNo}`} className="postsCardLink">
             {inputAnswer
             && <StIconInputAnswer>✔</StIconInputAnswer>
             }

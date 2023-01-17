@@ -39,3 +39,22 @@
 .inputAnswer-true:hover{
   background-color: #a0a0a0 !important;
 }
+
+/*글 상세*/
+.postDetailInputAnswer{
+  margin-top: 10px;
+}
+
+/*이전 페이지로 이동 아이콘*/
+.prevIcon{
+  position: absolute;
+  left: -20px;
+  top: -32px;
+  color: var(--color-point-orange);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.prevIcon:hover{
+  color: var(--color-defaultLight);
+}
