@@ -27,7 +27,7 @@ const PostsDetailSuccessListBox = () => {
                 <StPostsDetailSuccessListUl>
                     {isLoading && <StCenterMessage>열심히 데이터를 불러오는 중이에요~!</StCenterMessage>}
                     {error && <StCenterMessage>에러가 났네요! 다시 시도해주세요!</StCenterMessage>}
-                    {postDetail?.passedPeople.length === 0
+                    {postDetail?.passedPeople?.length === 0
                     ? <StCenterMessage>정답자가 없습니다!</StCenterMessage>
                     : passedPeople?.map((person)=>{
                       console.log('person: ', person)
