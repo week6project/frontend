@@ -76,12 +76,12 @@ const ForgotPwModal = () => {
 
   const onBlurSignupInputPassword = (e) => {
     //유효성 검사 비밀번호
-    const regexPassword = /^[a-z|A-Z|0-9|]{1,10}$/;
+    const regexPassword = /^[a-z|A-Z|0-9|]{4,30}$/;
     let { value } = e.target;
     if (!regexPassword.test(value)) {
       setIsPassword(false);
       console.log("setIsPassword : ", isPassword);
-      return setValidMessagePassword("❗ 영어, 숫자 / 10자 이내로 입력");
+      return setValidMessagePassword("❗ 영어, 숫자 / 4~30자 이내로 입력");
     } else {
       setIsPassword(true);
       console.log("setIsPassword : ", isPassword);

@@ -18,7 +18,7 @@ const Login = () => {
   const user = useSelector((state) => state);
 
   //로그인
-  const {data} = useSelector((state) => state.loginSlice);
+  const data = useSelector((state) => state.loginSlice);
   console.log('로그인 loginData : ' , data)
 
   //회원가입, 비밀번호 변경
