@@ -14,7 +14,12 @@ import { __postUsers } from "../redux/modules/loginSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const user = useSelector((state) => state);
+
+  //로그인
+  const {data} = useSelector((state) => state.loginSlice);
+  console.log('로그인 loginData : ' , data)
 
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
@@ -22,11 +27,9 @@ const Login = () => {
 
   const onClickOpenSignup = () => {
     dispatch(isModalGlobalToggleSignup(true));
-    console.log("로그인 클릭 isModalOpen : ", isModalToggleSignup);
   };
   const onClickOpenForgotPw = () => {
     dispatch(isModalGlobalTogglePw(true));
-    console.log("비밀번호변경 isModalOpen : ", isModalTogglePw);
   };
 
   const [userId, setuserId] = useState("");
@@ -56,13 +59,6 @@ const Login = () => {
   const onLoginHandler = (event) => {
     event.preventDefault();
 
-    const User = {
-      id: Date.now(),
-      userId,
-      password,
-    };
-    //action의 반환값을 디스패치한다
-    dispatch(__postUsers(User));
     // .then((response) => {
     //   if (response.payload.loginSuccess) {
     //     alert(`${userId}님 환영합니다.`);
@@ -73,16 +69,24 @@ const Login = () => {
     //   }
 
     // db.
-    console.log("user=", user);
-    if (userId === userId) {
-      if (password === password) {
+    // console.log("user=", user);
+    if (userId === userId && password === password) {
+        const User = {
+          id: Date.now(),
+          userId,
+          password,
+        };
+        //action의 반환값을 디스패치한다
+        dispatch(__postUsers(User));
+        //상태 값 ok라면
+
         alert(`${userId}님 환영합니다.`);
         navigate("/posts");
-      } else {
-        alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
-      }
+
+    }else {
+      alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
     }
-    console.log("user2=", user);
+    // console.log("user2=", user);
   };
   return (
     <>
@@ -98,6 +102,7 @@ const Login = () => {
               maxlength="10"
               value={userId}
               onChange={IsLoginId}
+              autoFocus
             />
           </StIDPW>
           <StIDPW>

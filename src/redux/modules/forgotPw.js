@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
-import { serverUrl, tokenLocal } from ".";
+import { serverUrl, tokenLocal, refreshToken } from ".";
 
 
 const initialState = {
@@ -15,11 +15,7 @@ export const __forgotPw = createAsyncThunk(
   "posts/FORGOT_PW",
   async (payload, thunkAPI) => {
     try{
-      const {data} = await axios.patch(`${serverUrl}/user/reset`, payload, {
-          headers: {
-            authorization: tokenLocal
-          }
-      })
+      const {data} = await axios.patch(`${serverUrl}/user/reset`, payload)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       console.log('error: ', error.response.data.errorMessage)
