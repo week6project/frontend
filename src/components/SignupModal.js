@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import InputWithLabelDefault from "./InputWithLabelDefault";
 import useInput from "../hooks/useInput";
 import ButtonDefault from "./ButtonDefault";
-import { isModalGlobalToggleSignup } from "../redux/modules/signup";
+import { isModalGlobalToggleSignup, __signup } from "../redux/modules/signup";
 //style, images, etc
 import logo from "../images/myGiraffe.png";
 import { COLORS } from "../style/StyleGlobal";
@@ -18,7 +18,7 @@ const SignupModal = () => {
   const navigate = useNavigate();
 
   //useinput
-  const [ValueId, onChangeInputValueId, setValueId] = useInput("");
+  const [valueId, onChangeInputValueId, setValueId] = useInput("");
   const [valueNickname, onChangeInputValueNickname, setValueNickname] =
     useInput("");
   const [valueEmail, onChangeInputValueEmail, setValueEmail] = useInput("");
@@ -121,8 +121,15 @@ const SignupModal = () => {
   const onSubmitSignup = (e) => {
     e.preventDefault();
     if (isId && isNickname && isEmail && isPassword && isPasswordCheck) {
-      alert("로그인 성공!");
-      navigate("/posts");
+      const newSignup={
+        userId: valueId,
+        nickname: valueNickname,
+        email: valueEmail,
+        password: valuePw,
+      }
+      dispatch(__signup(newSignup))
+      alert("회원가입 성공!");
+      navigate("/");
     } else {
       return false;
     }
@@ -147,7 +154,7 @@ const SignupModal = () => {
               autoFocus="autofocus"
               inputType="text"
               inputId="signupModalInputId"
-              inputValue={ValueId}
+              inputValue={valueId}
               onChange={onChangeInputValueId}
               onBlur={onBlurSignupInputId}
               validMessage={validMessageId}
