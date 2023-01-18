@@ -38,7 +38,7 @@ const postDetailSlice = createSlice({
     },
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
-      state.postDetail = action.payload; // Store에 있는 postDetail에 서버에서 가져온 data 추가
+      state.postDetail = action.payload.data; // Store에 있는 postDetail에 서버에서 가져온 data 추가
       console.log("디테일 action.payload : ", action.payload);
       console.log("디테일 state.postDetail : ", state.postDetail);
     },

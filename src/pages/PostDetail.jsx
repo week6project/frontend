@@ -22,8 +22,8 @@ const PostDetail = () => {
   const paramId = parseInt(param.postId); //파라메터값 숫자열로 변환
   const navigate = useNavigate();
 
-  const { isLoading, error } = useSelector((state) => state.postDetailSlice);
-  const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail.data);
+  const { isLoading, error,} = useSelector((state) => state.postDetailSlice);
+  const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail);
   const postDetail = postsDetailState
   console.log('디테일! postsDetailState : ', postDetail)
 
