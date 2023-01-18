@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { serverUrl } from ".";
+import { serverUrl, tokenLocal } from ".";
 
 const initialState = {
   posts: [],
@@ -11,12 +11,16 @@ const initialState = {
 export const __getPosts = createAsyncThunk(
   "posts/GET_POSTS",
   async (payload, thunkAPI) => {
-    try {
-      const { data } = await axios.get(`${serverUrl}/posts`);
-      console.log("asd", data);
-      return thunkAPI.fulfillWithValue(data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+    try{
+      const data = await axios.get(`${serverUrl}/posts`, {
+        headers: {
+            authorization: tokenLocal
+        }
+    })
+      console.log('data : ', data.data)
+      return thunkAPI.fulfillWithValue(data)
+    }catch(error){
+      return thunkAPI.rejectWithValue(error)
     }
   },
 );

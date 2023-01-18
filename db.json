@@ -2,8 +2,7 @@
   "data": [
     {
       "id": 1,
-      "postId": 11,
-      "postNo": 1,
+      "postId": 1,
       "userNo": 2,
       "nickname": "정답자징징이",
       "image": "https://i.imgur.com/7gpx7xw.png",
@@ -15,8 +14,7 @@
     },
     {
       "id": 2,
-      "postId": 12,
-      "postNo": 2,
+      "postId": 2,
       "userNo": 3,
       "nickname": "가나다라마바사아자차",
       "image": "https://i.imgur.com/7gpx7xw.png",
@@ -28,8 +26,7 @@
     },
     {
       "id": 3,
-      "postId": 13,
-      "postNo": 3,
+      "postId": 3,
       "userNo": 4,
       "nickname": "닉",
       "image": "https://i.imgur.com/7gpx7xw.png",
@@ -41,8 +38,7 @@
     },
     {
       "id": 4,
-      "postId": 14,
-      "postNo": 4,
+      "postId": 4,
       "userNo": 5,
       "nickname": "닉네임",
       "image": "https://i.imgur.com/7gpx7xw.png",
@@ -55,7 +51,6 @@
     {
       "id": 5,
       "postId": 5,
-      "postNo": 5,
       "userNo": 6,
       "nickname": "정답자스펀지밥",
       "image": "https://i.imgur.com/7gpx7xw.png",
@@ -67,8 +62,7 @@
     },
     {
       "id": 6,
-      "postId": 16,
-      "postNo": 6,
+      "postId": 6,
       "userNo": 7,
       "nickname": "문제푸는스펀지밥",
       "image": "https://i.imgur.com/7gpx7xw.png",
@@ -104,6 +98,36 @@
       "id": 1673953944518,
       "userId": "asd",
       "password": "weqe"
+    },
+    {
+      "id": 1673941474224,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673941619415,
+      "userId": "as",
+      "password": ""
+    },
+    {
+      "id": 1673950869895,
+      "userId": "asdf",
+      "password": "qwer1234"
+    },
+    {
+      "id": 1673951663166,
+      "userId": "",
+      "password": ""
+    },
+    {
+      "id": 1673951901894,
+      "userId": "123",
+      "password": "123"
+    },
+    {
+      "id": 1673953776692,
+      "userId": "123",
+      "password": "123"
     }
   ],
   "lists": [

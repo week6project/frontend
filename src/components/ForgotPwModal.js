@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import InputWithLabelDefault from "./InputWithLabelDefault";
 import useInput from "../hooks/useInput";
 import ButtonDefault from "./ButtonDefault";
-import { isModalGlobalTogglePw } from "../redux/modules/forgotPw";
+import { isModalGlobalTogglePw, __forgotPw } from "../redux/modules/forgotPw";
 //style, images, etc
 import logo from "../images/myGiraffe.png";
 import { COLORS } from "../style/StyleGlobal";
@@ -19,7 +19,7 @@ const ForgotPwModal = () => {
   const navigate = useNavigate();
 
   //useinput
-  const [ValueId, onChangeInputValueId, setValueId] = useInput("");
+  const [valueId, onChangeInputValueId, setValueId] = useInput("");
   const [valueEmail, onChangeInputValueEmail, setValueEmail] = useInput("");
   const [valuePw, onChangeInputValuePw, setValuePw] = useInput("");
   const [valuePwCheck, onChangeInputValuePwCheck, setValuePwCheck] =
@@ -40,6 +40,10 @@ const ForgotPwModal = () => {
 
   //Modal Mode
   const { isModalTogglePw } = useSelector((state) => state.forgotPw);
+
+  //res message
+  const {error, data} = useSelector((state)=>state.forgotPw)
+
 
   const onBlurSignupInputId = (e) => {
     //유효성 검사 아이디
@@ -103,8 +107,18 @@ const ForgotPwModal = () => {
   const onSubmitForgot = (e) => {
     e.preventDefault();
     if (isId && isEmail && isPassword && isPasswordCheck) {
-      alert("로그인 성공!");
-      navigate("/posts");
+      const newPw={
+        userId: valueId,
+        email: valueEmail,
+        password: valuePw,
+      }
+      dispatch(__forgotPw(newPw))
+      if(error !== undefined){
+        alert(error);
+      }else{
+        alert(data);
+      }
+      navigate("/");
     } else {
       return false;
     }
@@ -129,7 +143,7 @@ const ForgotPwModal = () => {
               autoFocus="autofocus"
               inputType="text"
               inputId="signupModalInputId"
-              inputValue={ValueId}
+              inputValue={valueId}
               onChange={onChangeInputValueId}
               onBlur={onBlurSignupInputId}
               validMessage={validMessageId}
@@ -153,7 +167,7 @@ const ForgotPwModal = () => {
               onChange={onChangeInputValuePw}
               onBlur={onBlurSignupInputPassword}
               validMessage={validMessagePassword}
-              labelText="비밀번호"
+              labelText="변경할 비밀번호"
               inputPaceholder={"영어,숫자/ 10자이내"}
             />
             <InputWithLabelDefault
@@ -163,7 +177,7 @@ const ForgotPwModal = () => {
               onChange={onChangeInputValuePwCheck}
               onBlur={onBlurSignupInputPasswordCheck}
               validMessage={validMessagePasswordCheck}
-              labelText="비밀번호 확인"
+              labelText="비밀번호 재입력"
               inputPaceholder={"비밀번호 재입력"}
             />
           </StSignupModalInputFormBox>

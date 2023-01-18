@@ -17,18 +17,18 @@ const Posts = () => {
   const dispatch = useDispatch();
 
   const { isLoading, error } = useSelector((state) => state.postsSlice);
-  const { posts } = useSelector((state) => state.postsSlice.data);
+  const { posts } = useSelector((state) => state);
+  console.log('posts : ' , posts)
+  //console.log('posts: ', posts)
+  useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
+    dispatch(__getPosts())
+  }, [dispatch])
 
-  useEffect(() => {
-    //페이지 렌더링 후 posts 목록 가져오기
-    dispatch(__getPosts());
-  }, [dispatch]);
+  const navigate=useNavigate()
+  const onClickNavPost=()=>{ //문제내기 버튼 클릭시 글작성 페이지로 이동
+    navigate('/post')
+  }
 
-  const navigate = useNavigate();
-  const onClickNavPost = () => {
-    //문제내기 버튼 클릭시 글작성 페이지로 이동
-    navigate("/post");
-  };
 
   return (
     <StPostsWrap>
@@ -48,7 +48,7 @@ const Posts = () => {
         {error && (
           <StCenterMessage>에러가 났네요! 다시 시도해주세요!</StCenterMessage>
         )}
-        {posts.map((post) => {
+        {posts?.map((post) => {
           //정답자 없는 문제 출력
           return (
             !post.inputAnswer && (
@@ -63,7 +63,7 @@ const Posts = () => {
             )
           );
         })}
-        {posts.map((post) => {
+        {posts?.map((post) => {
           //정답자 있는 문제 출력
           return (
             post.inputAnswer && (
