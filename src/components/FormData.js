@@ -106,6 +106,8 @@ const FormData = () => {
 };
 
 export default FormData;
+
+// CSS
 const Wrap = styled.div`
   width: 400px;
   height: 400px;
