@@ -8,26 +8,6 @@ const initialState = {
   isLoading: false,
   error: null,
 };
-// //GET
-// export const __getUsers = createAsyncThunk(
-//   "getUsers",
-//   async (payload, thunkAPI) => {
-//     //console.log("payload=", payload);
-//     try {
-//       const { data } = await axios.get(
-//         //"http://localhost:3001/users/",
-//         // "http://prachang.shop/api/users/",
-//         payload,
-//       );
-//       // console.log("payload=", payload);
-//       // console.log("data=", data);
-//       return thunkAPI.fulfillWithValue(data);
-//     } catch (error) {
-//       //console.log(error);
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   },
-// );
 
 //POST
 export const __postUsers = createAsyncThunk(

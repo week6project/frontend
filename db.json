@@ -11,12 +11,7 @@
       "difficult": 3,
       "createdAt": "2022-07-25T07:45:56.000Z",
       "inputHint": "힌트는 OOO",
-      "passedPeople": [
-        "김짱구",
-        "티니핑",
-        "라이언",
-        "펭수찡"
-      ]
+      "passedPeople": ["김짱구", "티니핑", "라이언", "펭수찡"]
     },
     {
       "id": 2,
@@ -29,12 +24,7 @@
       "difficult": 5,
       "createdAt": "2022-07-22T07:45:56.000Z",
       "inputHint": "힌트는 222",
-      "passedPeople": [
-        "김짱구2",
-        "티니핑2",
-        "라이언2",
-        "펭수찡2"
-      ]
+      "passedPeople": ["김짱구2", "티니핑2", "라이언2", "펭수찡2"]
     },
     {
       "id": 3,
@@ -47,12 +37,7 @@
       "difficult": 1,
       "createdAt": "2022-07-22T07:45:56.000Z",
       "inputHint": "힌트는 333",
-      "passedPeople": [
-        "김짱구3",
-        "티니핑3",
-        "라이언3",
-        "펭수찡3"
-      ]
+      "passedPeople": ["김짱구3", "티니핑3", "라이언3", "펭수찡3"]
     },
     {
       "id": 4,
@@ -65,16 +50,11 @@
       "difficult": 2,
       "createdAt": "2023-01-17T07:45:56.000Z",
       "inputHint": "힌트는 444",
-      "passedPeople": [
-        "김짱구4",
-        "티니핑4",
-        "라이언4",
-        "펭수찡4"
-      ]
+      "passedPeople": ["김짱구4", "티니핑4", "라이언4", "펭수찡4"]
     },
     {
       "id": 5,
-      "postId": 15,
+      "postId": 5,
       "postNo": 5,
       "userNo": 6,
       "nickname": "정답자스펀지밥",
@@ -83,12 +63,7 @@
       "difficult": 5,
       "createdAt": "2023-01-17T07:45:56.000Z",
       "inputHint": "힌트는 555",
-      "passedPeople": [
-        "김짱구5",
-        "티니핑5",
-        "라이언5",
-        "펭수찡5"
-      ]
+      "passedPeople": ["김짱구5", "티니핑5", "라이언5", "펭수찡5"]
     },
     {
       "id": 6,
@@ -101,12 +76,7 @@
       "difficult": 5,
       "createdAt": "2023-01-17T07:45:56.000Z",
       "inputHint": "힌트는 666",
-      "passedPeople": [
-        "김짱구6",
-        "티니핑6",
-        "라이언6",
-        "펭수찡6"
-      ]
+      "passedPeople": ["김짱구6", "티니핑6", "라이언6", "펭수찡6"]
     }
   ],
   "users": [
@@ -134,6 +104,15 @@
       "id": 1673953944518,
       "userId": "asd",
       "password": "weqe"
+    }
+  ],
+  "lists": [
+    {
+      "userNo": 1,
+      "difficult": 3,
+      "image": "토마토.jpg",
+      "inputAnswer": "토마토",
+      "inputHint": "빨간 맛나는 과일"
     }
   ]
 }
