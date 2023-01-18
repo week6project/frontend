@@ -44,7 +44,6 @@ const ForgotPwModal = () => {
   //res message
   const {error, data} = useSelector((state)=>state.forgotPw)
 
-
   const onBlurSignupInputId = (e) => {
     //유효성 검사 아이디
     const regexId = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,10}$/;
@@ -113,7 +112,8 @@ const ForgotPwModal = () => {
         password: valuePw,
       }
       dispatch(__forgotPw(newPw))
-      if(error !== undefined){
+      if(error){
+        console.log('비번 변경 에러 : ', error)
         alert(error);
       }else{
         alert(data);

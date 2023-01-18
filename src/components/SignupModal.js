@@ -129,7 +129,8 @@ const SignupModal = () => {
       }
       dispatch(__signup(newSignup))
       alert("회원가입 성공!");
-      navigate("/");
+      onClickCloseSignupModal()
+      navigate('/')
     } else {
       return false;
     }
