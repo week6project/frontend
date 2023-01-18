@@ -18,6 +18,7 @@ const PostsDetailSuccessListBox = () => {
     let keyI = 1
     const { isLoading, error, postDetail } = useSelector((state) => state.postDetailSlice);
     const passedPeople = postDetail.passedPeople
+    console.log('정답자 확인 postDetail : ', postDetail)
 
   return (
     <StPostsDetailSuccessListBox>
@@ -26,10 +27,14 @@ const PostsDetailSuccessListBox = () => {
                 <StPostsDetailSuccessListUl>
                     {isLoading && <StCenterMessage>열심히 데이터를 불러오는 중이에요~!</StCenterMessage>}
                     {error && <StCenterMessage>에러가 났네요! 다시 시도해주세요!</StCenterMessage>}
-                    {!postDetail.inputAnswer
+                    {postDetail?.passedPeople?.length === 0
                     ? <StCenterMessage>정답자가 없습니다!</StCenterMessage>
-                    : passedPeople.map((person)=>
-                        <PostsDetailSuccessListAuth key={keyI++} person={person}/>)
+                    : passedPeople?.map((person)=>{
+                      console.log('person: ', person)
+                      return (
+                        <PostsDetailSuccessListAuth key={keyI++} person={person}/>
+                        )
+                      })
                     }
                 </StPostsDetailSuccessListUl>
         </StPostsDetailSuccessListUlBox>

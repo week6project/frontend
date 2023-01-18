@@ -22,9 +22,10 @@ const PostDetail = () => {
   const paramId = parseInt(param.postId); //파라메터값 숫자열로 변환
   const navigate = useNavigate();
 
-  const { isLoading, error, postDetail } = useSelector(
-    (state) => state.postDetailSlice.data,
-  );
+  const { isLoading, error,} = useSelector((state) => state.postDetailSlice);
+  const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail);
+  const postDetail = postsDetailState
+  console.log('디테일! postsDetailState : ', postDetail)
 
   const dateEdit = postDetail.createdAt?.slice(0, 10); //날짜 형식에 맞게 가공
   const star = "⭐".repeat(postDetail?.difficult); //난이도 수치에 맞게 별 모양 출력

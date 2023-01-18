@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { serverUrl, tokenLocal } from ".";
+import { serverUrl, tokenLocal, refreshToken } from ".";
 
 const initialState = {
   posts: [],
@@ -14,10 +14,14 @@ export const __getPosts = createAsyncThunk(
     try{
       const data = await axios.get(`${serverUrl}/posts`, {
         headers: {
-            authorization: tokenLocal
+            Authorization: tokenLocal,
+            refreshAuthorization: refreshToken,
+            // Cookie: `Authorization=${tokenLocal}; 
+            //         refreshAuthorization=${refreshToken};`
         }
     })
-      console.log('data : ', data.data)
+    console.log('포스츠 tokenLocal : ', tokenLocal)
+    console.log('포스츠 refreshToken : ', refreshToken)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error)
@@ -35,9 +39,7 @@ const postsSlice = createSlice({
     },
     [__getPosts.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
-      console.log("action.payload : ", action.payload);
-      console.log("state.posts : ", state.posts);
-      state.posts = action.payload; // Store에 있는 posts에 서버에서 가져온 data 추가
+      state.posts = action.payload.data.data.posts; // Store에 있는 posts에 서버에서 가져온 data 추가
     },
     [__getPosts.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경

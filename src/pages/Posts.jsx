@@ -17,8 +17,9 @@ const Posts = () => {
   const dispatch = useDispatch();
 
   const { isLoading, error } = useSelector((state) => state.postsSlice);
-  const { posts } = useSelector((state) => state);
-  console.log('posts : ' , posts)
+  //const { posts } = useSelector((state) => state.postsSlice);
+  const { posts } = useSelector((state) => state.postsSlice);
+  console.log('posts 확인 !! : ' , posts )
   //console.log('posts: ', posts)
   useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
     dispatch(__getPosts())
@@ -51,10 +52,10 @@ const Posts = () => {
         {posts?.map((post) => {
           //정답자 없는 문제 출력
           return (
-            !post.inputAnswer && (
+            !post.isAnswered && (
               <PostsCard
-                key={post.postNo}
-                postNo={post.postNo}
+                key={post.id}
+                idPost={post.id}
                 image={post.image}
                 nickname={post.nickname}
                 createdAt={post.createdAt}
@@ -66,15 +67,16 @@ const Posts = () => {
         {posts?.map((post) => {
           //정답자 있는 문제 출력
           return (
-            post.inputAnswer && (
+            post.isAnswered && (
               <PostsCard
-                key={post.postNo}
+                key={post.id}
                 postNo={post.postNo}
                 image={post.image}
                 nickname={post.nickname}
                 createdAt={post.createdAt}
                 difficult={post.difficult}
                 inputAnswer={post.inputAnswer}
+                isAnswered={post.isAnswered}
               ></PostsCard>
             )
           );
