@@ -14,10 +14,10 @@ export const __getPostDetail = createAsyncThunk(
     try{
       const {data} = await axios.get(`${serverUrl}/posts/${payload}`,{
         headers: {
-          Authorization: tokenLocal,
-          refreshAuthorization: refreshToken,
-          // Cookie: `Authorization=${tokenLocal}; 
-          //         refreshAuthorization=${refreshToken};`
+          authorization: tokenLocal,
+          refreshauthorization: refreshToken,
+          // Cookie: `authorization=${tokenLocal}; 
+          //         refreshauthorization=${refreshToken};`
         }
       })
       console.log('포스트 디테일 페이지 확인 : ', data)

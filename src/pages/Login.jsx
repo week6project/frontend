@@ -10,7 +10,7 @@ import ButtonDefault from "../components/ButtonDefault";
 import { COLORS } from "../style/StyleGlobal";
 import { __postUsers } from "../redux/modules/loginSlice";
 
-//로그인 창
+//로그인 페이지
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
