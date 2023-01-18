@@ -10,7 +10,7 @@ import ButtonDefault from "../components/ButtonDefault";
 import { COLORS } from "../style/StyleGlobal";
 import { __postUsers } from "../redux/modules/loginSlice";
 
-//로그인 창
+//로그인 페이지
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Login = () => {
   const user = useSelector((state) => state);
 
   //로그인
-  const {data} = useSelector((state) => state.loginSlice);
+  const data = useSelector((state) => state.loginSlice);
   console.log('로그인 loginData : ' , data)
 
   //회원가입, 비밀번호 변경
