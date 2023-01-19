@@ -15,15 +15,15 @@ import { COLORS } from "../style/StyleGlobal";
 
 const Posts = () => {
   const dispatch = useDispatch();
-
+  useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
+    dispatch(__getPosts())
+  }, [dispatch])
   const { isLoading, error } = useSelector((state) => state.postsSlice);
   //const { posts } = useSelector((state) => state.postsSlice);
   const { posts } = useSelector((state) => state.postsSlice);
   console.log('posts 확인 !! : ' , posts )
   //console.log('posts: ', posts)
-  useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
-    dispatch(__getPosts())
-  }, [dispatch])
+  
 
   const navigate=useNavigate()
   const onClickNavPost=()=>{ //문제내기 버튼 클릭시 글작성 페이지로 이동
