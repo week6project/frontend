@@ -14,10 +14,10 @@ import styled from "styled-components";
 import {COLORS} from '../style/StyleGlobal'
 import '../css/style.css'
 
-const PostsDetailSuccessListBox = () => {
+const PostsDetailSuccessListBox = (postsDetailState) => {
     let keyI = 1
-    const { isLoading, error, postDetail } = useSelector((state) => state.postDetailSlice);
-    const passedPeople = postDetail.passedPeople
+    const { isLoading, error, postDetail } = postsDetailState
+    const passedPeople = postDetail?.passedPeople
     console.log('정답자 명단 보기 : ', passedPeople)
 
   return (

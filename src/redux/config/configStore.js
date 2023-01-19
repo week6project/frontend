@@ -8,6 +8,7 @@ import postsSlice from "../modules/postsSlice";
 import postDetailSlice from "../modules/postDetailSlice";
 import loginSlice from "../modules/loginSlice";
 import postSlice from "../modules/postSlice";
+import addAnswerSlice from '../modules/addAnswerSlice';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     postDetailSlice,
     loginSlice,
     postSlice,
+    addAnswerSlice,//정답 제출 모듈
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: getDefaultMiddleware({

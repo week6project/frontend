@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { serverUrl, tokenLocal, refreshToken } from ".";
+import { serverUrl} from ".";
+const tokenLocal = localStorage.getItem('token');
+const refreshToken = localStorage.getItem('refreshToken');
+
 
 axios.defaults.withCredentials = true;
 // Initial State

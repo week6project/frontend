@@ -7,7 +7,8 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import ButtonDefault from "../components/ButtonDefault";
 import InputWithLabelDefault from "../components/InputWithLabelDefault";
 import useInput from "../hooks/useInput";
-import { __getPostDetail, __addAnswer } from "../redux/modules/postDetailSlice";
+import { __getPostDetail } from "../redux/modules/postDetailSlice";
+import { __addAnswer } from '../redux/modules/addAnswerSlice';
 import PostsDetailSuccessListAuth from "../components/PostsDetailSuccessListAuth";
 import PostsDetailSuccessListBox from "../components/PostsDetailSuccessListBox";
 
@@ -35,13 +36,22 @@ const PostDetail = () => {
   //정답자 명단에서 현재 계정 조회 후 isAnswer 값 변경
   console.log('현재 userNo : ', postDetail.userNo)
   console.log('정답자 명단 userNo : ', postDetail.passedUserNo)
-  if(postDetail.passedUserNo?.includes(postDetail.userNo)) setIsAnswer(true)
   console.log('정답자 isAnswer : ', isAnswer)
+  
+  const updateIsAnswer=()=>{
+    
+    if(postDetail?.passedUserNo?.includes(postDetail?.userNo)){
+      setIsAnswer(true)
+      console.log('***정답 명단 업데이트 : ', postDetail?.passedUserNo?.includes(postDetail?.userNo))
+    }
+    console.log('***업데이트 정답자 명단 비교 : ', postDetail?.passedUserNo?.includes(postDetail?.userNo))
+  }
 
   const dateEdit = postDetail?.createdAt?.slice(0, 10); //날짜 형식에 맞게 가공
   const star = "⭐".repeat(postDetail?.difficult); //난이도 수치에 맞게 별 모양 출력
 
   const answerRef = useRef(); // 정답입력인풋
+
 
 
   //data 가져오기
@@ -53,34 +63,34 @@ const PostDetail = () => {
     const regexNickname = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,10}$/;
     let { value } = e.target;
     if (!regexNickname.test(value)) {
-      setIsAnswer(false);
       return setValidMessageAnswer("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
     } else {
-      setIsAnswer(true);
       return setValidMessageAnswer("");
     }
   };
 
   useEffect(() => {
     dispatch(__getPostDetail(paramId));
+    updateIsAnswer();
   }, [dispatch]);
 
   const onSubmitPostsDetailAnswer = (e) => {
     e.preventDefault();
-    if(postDetail.inputAnswer !== valueAnswer){
+    console.log('onSubmitPostsDetailAnswer 실행!')
+    if(postDetail.inputAnswer === valueAnswer){
+      const answerd={
+        //userNo: postDetail?.userNo, back단에서 처리
+        postId: postDetail?.postId
+      }
+      dispatch(__addAnswer(answerd))
+      console.log('정답 제출하고 디스패치 __addAnswer !!')
+      setIsAnswer(true)
+      alert('정답입니다~! 👏👏👏') 
+    }else{
       alert('정답이 아닙니다! 다시 맞춰보세요~😀')
       return answerRef.current.focus();
-    }else{
-      const answerd={
-        userNo: postDetail.userNo,
-        postId: postDetail.postId
-      }
-      alert('정답입니다~! 👏👏👏')
-      dispatch(__addAnswer(answerd))
     }
-    setIsAnswer(true)
   };
-
   const onClickViewHint = () => {
     setIsHint(true);
   };
@@ -89,6 +99,8 @@ const PostDetail = () => {
     //메인으로 가기
     navigate("/posts");
   };
+
+  console.log('isAnswer 최종확인 : ', isAnswer)
 
   return (
     <StPostsWrap>
@@ -106,9 +118,9 @@ const PostDetail = () => {
               난이도 : {star}
             </StPostsDetailInfoWriteDifficulty>
           </StPostsDetailInfoWrite>
-          {!postDetail?.isAnswer ? (
+          {!isAnswer ? 
             <StPostsDetailInfoAnswer>
-              {!isHint ? (
+              {!isHint ? 
                 <ButtonDefault
                   onClick={onClickViewHint}
                   bgColor={COLORS.defaultLight}
@@ -116,9 +128,9 @@ const PostDetail = () => {
                 >
                   힌트 보기
                 </ButtonDefault>
-              ) : (
+               : 
                 <StHintSpan>힌트 : {postDetail?.inputHint}</StHintSpan>
-              )}
+              }
               <StPostsDetailInfoAnswerForm onSubmit={onSubmitPostsDetailAnswer}>
                 <InputWithLabelDefault
                   inputRef={answerRef}
@@ -141,15 +153,15 @@ const PostDetail = () => {
                 </ButtonDefault>
               </StPostsDetailInfoAnswerForm>
             </StPostsDetailInfoAnswer>
-          ) : (
+           : 
             <StPostsDetailInfoAnswer>
               <StHintSpan>힌트 : {postDetail?.inputHint}</StHintSpan>
-              <StAnswerSpan>정답 : {postDetail?.inputHint}</StAnswerSpan>
+              <StAnswerSpan>정답 : {postDetail?.inputAnswer}</StAnswerSpan>
             </StPostsDetailInfoAnswer>
-          )}
+          }
 
           {/* 정답자 컴포넌트 */}
-          <PostsDetailSuccessListBox />
+          <PostsDetailSuccessListBox postsDetailState={postsDetailState} />
 
         </StPostsDetailInfoBox>
         <BsFillArrowLeftCircleFill
