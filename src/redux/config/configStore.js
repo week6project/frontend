@@ -1,6 +1,6 @@
 // src/redux/config/configStore.js
 
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware  } from "@reduxjs/toolkit";
 
 import signup from "../modules/signup";
 import forgotPw from "../modules/forgotPw";
@@ -19,6 +19,9 @@ const store = configureStore({
     postSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export default store;

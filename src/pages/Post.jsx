@@ -193,7 +193,6 @@ export default Post;
 const StPost = styled.div`
   background-image: url("img/myGiraffe_BG-01.png"),
     url("img/myGiraffe_BG-02.png");
-
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

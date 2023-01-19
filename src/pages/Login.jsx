@@ -11,7 +11,7 @@ import { COLORS } from "../style/StyleGlobal";
 import { __postUsers } from "../redux/modules/loginSlice";
 import useInput from "../hooks/useInput";
 
-//로그인 창
+//로그인 페이지
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,9 +19,11 @@ const Login = () => {
   const user = useSelector((state) => state);
 
   //로그인
+
   const { data, error } = useSelector((state) => state.loginSlice);
   const state = useSelector((state) => state);
   console.log("state", error);
+
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
   const { isModalTogglePw } = useSelector((state) => state.forgotPw);

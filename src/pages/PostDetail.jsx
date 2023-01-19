@@ -7,9 +7,10 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import ButtonDefault from "../components/ButtonDefault";
 import InputWithLabelDefault from "../components/InputWithLabelDefault";
 import useInput from "../hooks/useInput";
-import { __getPostDetail } from "../redux/modules/postDetailSlice";
+import { __getPostDetail, __addAnswer } from "../redux/modules/postDetailSlice";
 import PostsDetailSuccessListAuth from "../components/PostsDetailSuccessListAuth";
 import PostsDetailSuccessListBox from "../components/PostsDetailSuccessListBox";
+
 
 //style, etc
 import styled from "styled-components";
@@ -22,7 +23,7 @@ const PostDetail = () => {
   const paramId = parseInt(param.postId); //파라메터값 숫자열로 변환
   const navigate = useNavigate();
 
-  const { isLoading, error,} = useSelector((state) => state.postDetailSlice);
+  const { isLoading, error } = useSelector((state) => state.postDetailSlice);
   const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail);
   const postDetail = postsDetailState
   console.log('디테일! postsDetailState : ', postDetail)
@@ -61,9 +62,18 @@ const PostDetail = () => {
 
   const onSubmitPostsDetailAnswer = (e) => {
     e.preventDefault();
-    if (!isAnswer) {
+    if(postDetail.inputAnswer !== valueAnswer){
+      alert('정답이 아닙니다! 다시 맞춰보세요~😀')
       return answerRef.current.focus();
+    }else{
+      const answerd={
+        userNo: postDetail.userNo,
+        postId: postDetail.postId
+      }
+      alert('정답입니다~! 👏👏👏')
+      dispatch(__addAnswer(answerd))
     }
+    setIsAnswer(true)
   };
 
   const onClickViewHint = () => {
@@ -78,7 +88,7 @@ const PostDetail = () => {
   return (
     <StPostsWrap>
       <StPostsBox>
-        <StPostsDetailImg />
+        <StPostsDetailImg src={postDetail?.image} />
         <StPostsDetailInfoBox>
           <StPostsDetailInfoWrite>
             <StPostsDetailInfoWriteAuth>
@@ -91,7 +101,7 @@ const PostDetail = () => {
               난이도 : {star}
             </StPostsDetailInfoWriteDifficulty>
           </StPostsDetailInfoWrite>
-          {!postDetail?.inputAnswer ? (
+          {!postDetail?.isAnswer ? (
             <StPostsDetailInfoAnswer>
               {!isHint ? (
                 <ButtonDefault

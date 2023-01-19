@@ -27,15 +27,18 @@ const PostsDetailSuccessListBox = () => {
                 <StPostsDetailSuccessListUl>
                     {isLoading && <StCenterMessage>열심히 데이터를 불러오는 중이에요~!</StCenterMessage>}
                     {error && <StCenterMessage>에러가 났네요! 다시 시도해주세요!</StCenterMessage>}
-                    {postDetail?.passedPeople?.length === 0
-                    ? <StCenterMessage>정답자가 없습니다!</StCenterMessage>
-                    : passedPeople?.map((person)=>{
-                      console.log('person: ', person)
-                      return (
-                        <PostsDetailSuccessListAuth key={keyI++} person={person}/>
-                        )
-                      })
+                    {!isLoading && !error 
+                    ? postDetail?.passedPeople?.length === 0
+                      ? <StCenterMessage>정답자가 없습니다!</StCenterMessage>
+                      : passedPeople?.map((person)=>{
+                        console.log('person: ', person)
+                        return (
+                          <PostsDetailSuccessListAuth key={keyI++} person={person}/>
+                          )
+                        })
+                    : null
                     }
+                    
                 </StPostsDetailSuccessListUl>
         </StPostsDetailSuccessListUlBox>
     </StPostsDetailSuccessListBox>
@@ -51,7 +54,8 @@ const StCenterMessage=styled.div`
   width: 100%;
   height: 100px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16;
+  color: red;
 `
 const StPostsDetailSuccessListUlBox=styled.div`
   display: flex;
