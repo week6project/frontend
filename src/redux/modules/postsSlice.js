@@ -11,20 +11,20 @@ const initialState = {
 export const __getPosts = createAsyncThunk(
   "posts/GET_POSTS",
   async (payload, thunkAPI) => {
-    try{
+    try {
       const data = await axios.get(`${serverUrl}/posts`, {
         headers: {
-            Authorization: tokenLocal,
-            refreshAuthorization: refreshToken,
-            // Cookie: `Authorization=${tokenLocal}; 
-            //         refreshAuthorization=${refreshToken};`
-        }
-    })
-    console.log('포스츠 tokenLocal : ', tokenLocal)
-    console.log('포스츠 refreshToken : ', refreshToken)
-      return thunkAPI.fulfillWithValue(data)
-    }catch(error){
-      return thunkAPI.rejectWithValue(error)
+          authorization: tokenLocal,
+          refreshauthorization: refreshToken,
+          // Cookie: `Authorization=${tokenLocal};
+          //         refreshAuthorization=${refreshToken};`
+        },
+      });
+      console.log("포스츠 tokenLocal : ", tokenLocal);
+      console.log("포스츠 refreshToken : ", refreshToken);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
   },
 );

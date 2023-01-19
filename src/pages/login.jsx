@@ -9,6 +9,7 @@ import { isModalGlobalTogglePw } from "../redux/modules/forgotPw";
 import ButtonDefault from "../components/ButtonDefault";
 import { COLORS } from "../style/StyleGlobal";
 import { __postUsers } from "../redux/modules/loginSlice";
+import useInput from "../hooks/useInput";
 
 //로그인 창
 const Login = () => {
@@ -18,12 +19,19 @@ const Login = () => {
   const user = useSelector((state) => state);
 
   //로그인
-  const {data} = useSelector((state) => state.loginSlice);
-  console.log('로그인 loginData : ' , data)
-
+  const { data, error } = useSelector((state) => state.loginSlice);
+  const state = useSelector((state) => state);
+  console.log("state", error);
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
   const { isModalTogglePw } = useSelector((state) => state.forgotPw);
+  //상태 메세지
+  const [validMessageId, setValidMessageId] = useState("");
+  const [validMessagePassword, setValidMessagePassword] = useState("");
+
+  //useinput
+  const [userId, onChangeInputUserId, setUserId] = useInput("");
+  const [password, onChangeInputPassword, setPassword] = useInput("");
 
   const onClickOpenSignup = () => {
     dispatch(isModalGlobalToggleSignup(true));
@@ -32,89 +40,110 @@ const Login = () => {
     dispatch(isModalGlobalTogglePw(true));
   };
 
-  const [userId, setuserId] = useState("");
+  const [isId, setIsId] = useState(false);
 
   //userId 특수문자 제외
   const IsLoginId = (e) => {
-    const curValue = e.currentTarget.value;
-    const notId = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
+    //유효성 검사 아이디
+    const regexId = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,10}$/;
+    let { value } = e.target;
+    if (!regexId.test(value)) {
+      setIsId(false);
+      console.log("setIsId : ", isId);
+      return setValidMessageId("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
+    } else {
+      setIsId(true);
+      console.log("setIsId2 : ", isId);
+      return setValidMessageId("");
+    }
+    // const curValue = e.currentTarget.value;
+    // const notId = /[~!@#$%";'^,&*()_+|</>=>`?:{[}]/g;
 
-    // 정규식에 역슬래시 적용이 안됨
-    setuserId(curValue.replace(notId, ""));
+    // // 정규식에 역슬래시 적용이 안됨
+    // setuserId(curValue.replace(notId, ""));
   };
   //password 특수문자 제외
-  const [password, setpassword] = useState("");
+
+  const [isPassword, setIsPassword] = useState(false);
 
   const IsLoginPw = (e) => {
-    const curValue = e.currentTarget.value;
-    const notPw = /[~!@#$%";'^,&*\\()_+|</>=>`?:{[}]/g;
-    setpassword(curValue.replace(notPw, ""));
+    //유효성 검사 비밀번호
+    const regexPassword = /^[a-z|A-Z|0-9|]{4,30}$/;
+    let { value } = e.target;
+    if (!regexPassword.test(value)) {
+      setIsPassword(false);
+      console.log("setIsPassword : ", isPassword);
+      return setValidMessagePassword("❗ 영어, 숫자 / 10자 이내로 입력");
+    } else {
+      setIsPassword(true);
+      console.log("setIsPassword : ", isPassword);
+      return setValidMessagePassword("");
+    }
+    //   const curValue = e.currentTarget.value;
+    //   const notPw = /[~!@#$%";'^,&*\\()_+|</>=>`?:{[}]/g;
+    //   setpassword(curValue.replace(notPw, ""));
   };
 
-  //요청보낼때 헤더에 미들웨어 요청할때 넣어주기 로컬스토리지에 담아봐라~
-  // headers["Authorization"] = `Bearer ${accessToken}`
-
-  const onLoginHandler = (event) => {
+  const onSubmitLogin = (event) => {
     event.preventDefault();
 
-    // .then((response) => {
-    //   if (response.payload.loginSuccess) {
-    //     alert(`${userId}님 환영합니다.`);
-    //     navigate("/mainList");
-    //     console.log("asdawd");
-    //   } else {
-    //     alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
-    //   }
+    //유효성 검사에 대한거
+    if (isId === false && isPassword === false) return false;
+    // 아이디랑 비밀번호 입력 후 서버검증
+    if (!error) {
+      const User = {
+        id: Date.now(),
+        userId,
+        password,
+      };
+      //action의 반환값을 디스패치한다
+      dispatch(__postUsers(User));
+      //상태 값 ok라면
+      console.log("err", error);
+      //error가 null인건.. 당연한거 아냐??
 
-    // db.
-    // console.log("user=", user);
-    if (userId === userId && password === password) {
-        const User = {
-          id: Date.now(),
-          userId,
-          password,
-        };
-        //action의 반환값을 디스패치한다
-        dispatch(__postUsers(User));
-        //상태 값 ok라면
-
-        alert(`${userId}님 환영합니다.`);
-        navigate("/posts");
-
-    }else {
+      alert(`${userId}님 환영합니다.`);
+      navigate("/posts");
+    } else {
       alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+      console.log("err2", error);
+      return false;
     }
     // console.log("user2=", user);
   };
   return (
     <>
       <StLogin>
-        <StForm name="LoginPage" method="POST">
-          <StImg src="img/myGiraffe.png" alt="내기린_로고" />
-
+        <StImg src="img/myGiraffe.png" alt="내기린_로고" />
+        <StForm name="LoginPage" method="POST" onSubmit={onSubmitLogin}>
           <StIDPW>
             <StH>ID</StH>
-            <StInput
+            {validMessageId && <span> {validMessageId}</span>}
+            <InputWithLabelDefault
               type="text"
               name="ID"
               maxlength="10"
               value={userId}
-              onChange={IsLoginId}
-              autoFocus
+              validMessage={validMessageId}
+              onChange={onChangeInputUserId}
+              onBlur={IsLoginId}
             />
           </StIDPW>
           <StIDPW>
             <StH>PW</StH>
-            <StInput
+            {validMessagePassword && <span> {validMessagePassword}</span>}
+            <InputWithLabelDefault
               type="password"
               name="password"
               maxlength="10"
               value={password}
-              onChange={IsLoginPw}
+              validMessage={validMessagePassword}
+              onChange={onChangeInputPassword}
+              onBlur={IsLoginPw}
             />
           </StIDPW>
           <StBtn>
-            <button onClick={onLoginHandler}>Login</button>
+            <button>Login</button>
           </StBtn>
         </StForm>
         <button>Social Login</button>
@@ -185,7 +214,7 @@ const StH = styled.h4`
   top: 9px;
 `;
 
-const StInput = styled.input`
+const InputWithLabelDefault = styled.input`
   width: 150px;
   height: 30px;
   border: 2px solid black;
