@@ -23,35 +23,40 @@ const PostDetail = () => {
   const paramId = parseInt(param.postId); //파라메터값 숫자열로 변환
   const navigate = useNavigate();
 
+  //answer 상태, 상태 메세지
+  const [isAnswer, setIsAnswer] = useState(false);
+  const [validMessageAnswer, setValidMessageAnswer] = useState("");
+
   const { isLoading, error } = useSelector((state) => state.postDetailSlice);
   const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail);
   const postDetail = postsDetailState
   console.log('디테일! postsDetailState : ', postDetail)
 
-  const dateEdit = postDetail.createdAt?.slice(0, 10); //날짜 형식에 맞게 가공
+  //정답자 명단에서 현재 계정 조회 후 isAnswer 값 변경
+  console.log('현재 userNo : ', postDetail.userNo)
+  console.log('정답자 명단 userNo : ', postDetail.passedUserNo)
+  if(postDetail.passedUserNo?.includes(postDetail.userNo)) setIsAnswer(true)
+  console.log('정답자 isAnswer : ', isAnswer)
+
+  const dateEdit = postDetail?.createdAt?.slice(0, 10); //날짜 형식에 맞게 가공
   const star = "⭐".repeat(postDetail?.difficult); //난이도 수치에 맞게 별 모양 출력
 
   const answerRef = useRef(); // 정답입력인풋
 
-  //answer 상태, 상태 메세지
-  const [isAnswer, setIsAnswer] = useState(false);
-  const [validMessageAnswer, setValidMessageAnswer] = useState("");
 
   //data 가져오기
   const [valueAnswer, onChangeValueAnswer, setValuAnswer] = useInput("");
   const [isHint, setIsHint] = useState(false);
 
   const checkPostDetailInputAnswer = (e) => {
-    //유효성 검사 닉네임
+    //유효성 검사 정답 제출
     const regexNickname = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,10}$/;
     let { value } = e.target;
     if (!regexNickname.test(value)) {
       setIsAnswer(false);
-      console.log("setIsNickname : ", isAnswer);
       return setValidMessageAnswer("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
     } else {
       setIsAnswer(true);
-      console.log("setIsNickname : ", isAnswer);
       return setValidMessageAnswer("");
     }
   };
@@ -145,6 +150,7 @@ const PostDetail = () => {
 
           {/* 정답자 컴포넌트 */}
           <PostsDetailSuccessListBox />
+
         </StPostsDetailInfoBox>
         <BsFillArrowLeftCircleFill
           onClick={onClickNavigatePosts}
