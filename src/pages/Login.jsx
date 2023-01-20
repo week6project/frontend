@@ -20,13 +20,9 @@ const Login = () => {
   const user = useSelector((state) => state);
 
   //로그인
-  
-  const { data, error, isLoginOk } = useSelector((state) => state.loginSlice);
-  const state = useSelector((state) => state.loginSlice);
-
   const { data, error } = useSelector((state) => state.loginSlice);
-  const state = useSelector((state) => state);
-  //console.log("state", error);
+  const state = useSelector((state) => state.loginSlice);
+  console.log('로그인 ❗❗❗ state : ' , state)
   const [loginState, setLoginState]=useState(false)
 
 
@@ -126,7 +122,6 @@ const Login = () => {
   },[state])
   
   console.log("로그인 최종 state : ", state);
-  console.log("로그인 최종 isLoginOk : ", isLoginOk);
   
 
   return (
