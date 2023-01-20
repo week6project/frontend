@@ -43,7 +43,6 @@ const Post2 = () => {
       reader.onload = () => {
         setImageSrc(reader.result);
         resolve();
-        console.log("setImage", reader.result);
       };
     });
   };
@@ -56,12 +55,11 @@ const Post2 = () => {
     encodeFileToBase64(e.target.files[0]);
     const formImg = e.target.files[0];
     setFileImg(formImg);
-    console.log("이미지파일전송", formImg);
     formData.append("file", formImg);
 
     //콘솔찍어보기
     for (const key of formData.keys()) {
-      console.log("key", key);
+      //console.log("key", key);
     }
   };
 
@@ -69,7 +67,6 @@ const Post2 = () => {
   const onDifficult = (e) => {
     //e.preventDefault();
     setDifficult(e.target.value);
-    console.log("diff", difficult);
   };
 
   // 디스패치
@@ -94,7 +91,7 @@ const Post2 = () => {
 
     //콘솔찍어보기
     for (const form of formData) {
-      console.log("form최종", form);
+      //console.log("form최종", form);
     }
 
     dispatch(__postFormData(formData));
@@ -115,11 +112,9 @@ const Post2 = () => {
     let { value } = e.target;
     if (!regexNickname.test(value)) {
       setIsAnswer(false);
-      console.log("setIsNickname : ", isAnswer);
       return setValidMessageAnswer("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
     } else {
       setIsAnswer(true);
-      console.log("setIsNickname : ", isAnswer);
       return setValidMessageAnswer("");
     }
   };
@@ -130,11 +125,9 @@ const Post2 = () => {
     let { value } = e.target;
     if (!regexNickname.test(value)) {
       setIsHint(false);
-      console.log("setIsNickname : ", isHint);
       return setValidMessageHint("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
     } else {
       setIsHint(true);
-      console.log("setIsNickname : ", isHint);
       return setValidMessageHint("");
     }
   };
@@ -164,8 +157,6 @@ const Post2 = () => {
     }
   }
   const formSaveImg = base64toFile(saveData, "test.png");
-  console.log("saveData2", saveData);
-  console.log("base64toFile", base64toFile(saveData, "test.png"));
 
   return (
     <StPost>

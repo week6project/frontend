@@ -12,11 +12,8 @@ export const __getPosts = createAsyncThunk(
   "posts/GET_POSTS",
   async (payload, thunkAPI) => {
     try {
-      console.log('포스트 메인 리듀서 콘솔 1')
       const tokenLocal = localStorage.getItem('token');
-      console.log('포스트 메인 리듀서 콘솔 2 : ', tokenLocal)
       const refreshToken = localStorage.getItem('refreshToken');
-      console.log('포스트 메인 리듀서 콘솔 3 : ', refreshToken)
       const data = await axios.get(`${serverUrl}/posts`, {
         headers: {
           authorization: tokenLocal,
@@ -25,7 +22,6 @@ export const __getPosts = createAsyncThunk(
           //         refreshAuthorization=${refreshToken};`
         },
       });
-      console.log('포스트 메인 리듀서 데이터 : ', data)
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -44,8 +40,6 @@ const postsSlice = createSlice({
     [__getPosts.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
       state.posts = action.payload.data.data.posts; // Store에 있는 posts에 서버에서 가져온 data 추가
-      console.log('포스트 메인 엑스트라 리듀서 state.posts : ', state.posts)
-      console.log('포스트 메인 엑스트라 리듀서 action.payload.data.data.posts : ', action.payload.data.data.posts)
     },
     [__getPosts.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경

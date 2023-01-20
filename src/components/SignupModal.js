@@ -160,7 +160,7 @@ const SignupModal = () => {
               onBlur={onBlurSignupInputId}
               validMessage={validMessageId}
               labelText="아이디"
-              inputPaceholder={"한글,영어,숫자/ 10자이내"}
+              inputPaceholder={"영어,숫자/ 10자이내"}
             />
             <InputWithLabelDefault
               inputType="text"

@@ -13,9 +13,7 @@ export const __getPostDetail = createAsyncThunk(
   "posts/GET_POST_DETAIL",
   async (payload, thunkAPI) => {
     try{
-      console.log('포스트 상세 리듀서 콘솔 1')
       const tokenLocal = localStorage.getItem('token');
-      console.log('포스트 상세 리듀서 콘솔 2 : ', tokenLocal)
       const refreshToken = localStorage.getItem('refreshToken');
       const {data} = await axios.get(`${serverUrl}/posts/${payload}`,{
         headers: {
@@ -25,7 +23,6 @@ export const __getPostDetail = createAsyncThunk(
           //         refreshauthorization=${refreshToken};`
         }
       })
-      console.log('디테일 페이지 리듀서 확인 data : ', data)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error)

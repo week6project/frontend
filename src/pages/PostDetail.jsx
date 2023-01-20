@@ -23,12 +23,10 @@ const localToken = localStorage?.getItem('token')
 
 const PostDetail = () => {
   
-  console.log('상세 localToken : ', localToken)
+
   const { decodedToken } = useJwt(localToken);
-  console.log('상세 페이지 현재 계정 정보 : ', decodedToken)
   const nowUserNo = decodedToken?.userNo
   // const {userNo} = nowUserNo
-  console.log('상세 nowUserNo : ', nowUserNo)
 
 
   const dispatch = useDispatch();
@@ -44,25 +42,18 @@ const PostDetail = () => {
   const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail);
   const postDetail = postsDetailState
   const matchUser = postDetail?.matchUser
-  console.log('❗❗❗❗😎 최최최종 matchUser : ', matchUser)
-  console.log('디테일! postsDetailState : ', postDetail)
 
   //정답자 명단에서 현재 계정 조회 후 isAnswer 값 변경
-  console.log('현재 userNo : ', postDetail.userNo)
-  console.log('정답자 명단 userNo : ', postDetail.passedUserNo)
-  console.log('정답자 isAnswer : ', isAnswer)
   
   //토큰 디코드 후 정답자 유저 비교 로직
   const {isAnswerGlobal}=useSelector((state)=>state.postDetailSlice)
-  console.log('🎄🎄🤣 상세 isAnswerGlobal : ', isAnswerGlobal)
+
   //const [matchUser, setMatchUser]=useState(false)
   const updateIsAnswer=()=>{
     if(postDetail?.passedUserNo?.includes(nowUserNo)){
       setIsAnswer(true)
       //setMatchUser(true)
     }
-    console.log('❗ matchUser : ' , matchUser)
-    console.log('***정답 명단 업데이트 : ', postDetail?.passedUserNo?.includes(postDetail?.userNo))
   }
 
   const dateEdit = postDetail?.createdAt?.slice(0, 10); //날짜 형식에 맞게 가공
@@ -94,14 +85,12 @@ const PostDetail = () => {
 
   const onSubmitPostsDetailAnswer = (e) => {
     e.preventDefault();
-    console.log('onSubmitPostsDetailAnswer 실행!')
     if(postDetail.inputAnswer === valueAnswer){
       const answerd={
         //userNo: postDetail?.userNo, back단에서 처리
         postId: postDetail?.postId
       }
       dispatch(__addAnswer(answerd))
-      console.log('정답 제출하고 디스패치 __addAnswer !!')
       setIsAnswer(true)
       alert('정답입니다~! 👏👏👏') 
     }else{
@@ -119,8 +108,6 @@ const PostDetail = () => {
     //메인으로 가기
     navigate("/posts");
   };
-
-  console.log('❗❗❗ 최종확인 matchUser : ', matchUser)
 
   return (
     <StPostsWrap>

@@ -22,7 +22,6 @@ const Posts = () => {
   const { isLoading, error } = useSelector((state) => state.postsSlice);
   //const { posts } = useSelector((state) => state.postsSlice);
   const { posts } = useSelector((state) => state.postsSlice);
-  console.log("posts 확인 !! : ", posts);
   //console.log('posts: ', posts)
 
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ const Posts = () => {
     //문제내기 버튼 클릭시 글작성 페이지로 이동
     navigate("/post2");
   };
-  console.log("포스트 메인 본문 시작");
 
   return (
     <StPostsWrap>
