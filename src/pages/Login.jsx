@@ -20,10 +20,11 @@ const Login = () => {
   const user = useSelector((state) => state);
 
   //로그인
-
   const { data, error } = useSelector((state) => state.loginSlice);
-  const state = useSelector((state) => state);
-  //console.log("state", error);
+  const state = useSelector((state) => state.loginSlice);
+  console.log('로그인 ❗❗❗ state : ' , state)
+  const [loginState, setLoginState]=useState(false)
+
 
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
@@ -35,6 +36,9 @@ const Login = () => {
   //useinput
   const [userId, onChangeInputUserId, setUserId] = useInput("");
   const [password, onChangeInputPassword, setPassword] = useInput("");
+
+  //로그인 값
+  const [isLoginState, setIsLoginState]=useState(false)
 
   const onClickOpenSignup = () => {
     dispatch(isModalGlobalToggleSignup(true));
@@ -81,7 +85,6 @@ const Login = () => {
       );
     } else {
       setIsPassword(true);
-      console.log("setIsPassword : ", isPassword);
       return setValidMessagePassword("");
     }
     //   const curValue = e.currentTarget.value;
@@ -89,34 +92,20 @@ const Login = () => {
     //   setpassword(curValue.replace(notPw, ""));
   };
 
-  const onSubmitLogin = (event) => {
+   const onSubmitLogin = async (event) =>  {
     event.preventDefault();
-
-    //유효성 검사에 대한거
+    //유효성 검사
     if (isId === false && isPassword === false) return false;
-    // 아이디랑 비밀번호 입력 후 서버검증
-    if (!error) {
       const User = {
         id: Date.now(),
         userId,
         password,
       };
-      //action의 반환값을 디스패치한다
+      console.log('로그인 디스패치 시작')
       dispatch(__postUsers(User));
-      //상태 값 ok라면
-      console.log("err", error);
-      //error가 null인건.. 당연한거 아냐??
-
-      alert(`${userId}님 환영합니다.`);
-      navigate("/posts");
-    } else {
-      alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
-      console.log("err2", error);
-      return false;
-    }
-    // console.log("user2=", user);
   };
 
+  //구글 로그인
   function onSignIn(googleUser) {
     const profile = googleUser.getBasicProfile();
     console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -124,6 +113,16 @@ const Login = () => {
     console.log("Image URL: " + profile.getImageUrl());
     console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
   }
+
+  //로그인 상태 OK일 경우 글 목록 페이지로 이동
+  useEffect(()=>{
+    if(state.users.status===200){
+      navigate('/posts')
+    }
+  },[state])
+  
+  console.log("로그인 최종 state : ", state);
+  
 
   return (
     <>

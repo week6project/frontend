@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 //component, hooks
+import { isAnswerGlobalToggle } from '../redux/modules/postDetailSlice';
+import { useDispatch } from 'react-redux';
 
 //style, etc
 import '../css/reset.css'
@@ -10,8 +12,13 @@ import {COLORS} from '../style/StyleGlobal'
 
 
 const PostsCard = ({idPost, image, nickname, createdAt, difficult, isAnswered, inputAnswer}) => {
+  const dispatch=useDispatch()
   const dateEdit = createdAt.slice(0, 10) //날짜 형식에 맞게 가공
   const star = '⭐'.repeat(difficult) //난이도 수치에 맞게 별 모양 출력
+  
+  // const isAnswerBoolean = isAnswered || false
+  // dispatch(isAnswerGlobalToggle(isAnswerBoolean))
+  // console.log('😂상세 페이지 isAnswerBoolean : ', isAnswerBoolean)
   return (
         <StPostsCard className={isAnswered && 'inputAnswer-true'}>
           <Link to={`/posts/${idPost}`} className="postsCardLink">
