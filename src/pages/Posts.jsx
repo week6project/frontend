@@ -23,13 +23,12 @@ const Posts = () => {
   const { posts } = useSelector((state) => state.postsSlice);
   console.log('posts 확인 !! : ' , posts )
   //console.log('posts: ', posts)
-  
 
   const navigate=useNavigate()
   const onClickNavPost=()=>{ //문제내기 버튼 클릭시 글작성 페이지로 이동
     navigate('/post')
   }
-
+  console.log('포스트 메인 본문 시작')
 
   return (
     <StPostsWrap>
@@ -56,6 +55,7 @@ const Posts = () => {
               <PostsCard
                 key={post.id}
                 idPost={post.id}
+                postNo={post.postNo}
                 image={post.image}
                 nickname={post.nickname}
                 createdAt={post.createdAt}
@@ -70,6 +70,7 @@ const Posts = () => {
             post.isAnswered && (
               <PostsCard
                 key={post.id}
+                idPost={post.id}
                 postNo={post.postNo}
                 image={post.image}
                 nickname={post.nickname}

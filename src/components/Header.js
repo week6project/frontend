@@ -7,9 +7,9 @@ import ButtonDefault from './ButtonDefault';
 //style, images, etc
 import logo from '../images/myGiraffe.png'
 import { COLORS } from "../style/StyleGlobal";
+import {  } from "react-router-dom";
 
 const Header = () => {
-
     const navigate = useNavigate()
     const onClickHeaderLogo=()=>{
         navigate('/')
@@ -18,8 +18,9 @@ const Header = () => {
     const onClickLogout=()=>{
         localStorage.clear('token')
         localStorage.clear('refreshToken')
-        navigate('/')
+        window.location.href='/'
         alert('로그아웃 되었습니다!')
+        //navigate('/')
     }
     // 로그인 페이지에서 공통헤더 숨김처리
     if (window.location.pathname === '/') return null

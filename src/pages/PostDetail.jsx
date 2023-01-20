@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import { useJwt } from "react-jwt";
 
 //component, hooks
 import ButtonDefault from "../components/ButtonDefault";
@@ -18,7 +19,18 @@ import styled from "styled-components";
 import { COLORS } from "../style/StyleGlobal";
 import "../css/style.css";
 
+const localToken = localStorage?.getItem('token')
+
 const PostDetail = () => {
+  
+  console.log('상세 localToken : ', localToken)
+  const { decodedToken } = useJwt(localToken);
+  console.log('상세 페이지 현재 계정 정보 : ', decodedToken)
+  const nowUserNo = decodedToken?.userNo
+  // const {userNo} = nowUserNo
+  console.log('상세 nowUserNo : ', nowUserNo)
+
+
   const dispatch = useDispatch();
   const param = useParams();
   const paramId = parseInt(param.postId); //파라메터값 숫자열로 변환
@@ -31,6 +43,8 @@ const PostDetail = () => {
   const { isLoading, error } = useSelector((state) => state.postDetailSlice);
   const postsDetailState = useSelector((state) => state.postDetailSlice.postDetail);
   const postDetail = postsDetailState
+  const matchUser = postDetail?.matchUser
+  console.log('❗❗❗❗😎 최최최종 matchUser : ', matchUser)
   console.log('디테일! postsDetailState : ', postDetail)
 
   //정답자 명단에서 현재 계정 조회 후 isAnswer 값 변경
@@ -38,13 +52,17 @@ const PostDetail = () => {
   console.log('정답자 명단 userNo : ', postDetail.passedUserNo)
   console.log('정답자 isAnswer : ', isAnswer)
   
+  //토큰 디코드 후 정답자 유저 비교 로직
+  const {isAnswerGlobal}=useSelector((state)=>state.postDetailSlice)
+  console.log('🎄🎄🤣 상세 isAnswerGlobal : ', isAnswerGlobal)
+  //const [matchUser, setMatchUser]=useState(false)
   const updateIsAnswer=()=>{
-    
-    if(postDetail?.passedUserNo?.includes(postDetail?.userNo)){
+    if(postDetail?.passedUserNo?.includes(nowUserNo)){
       setIsAnswer(true)
-      console.log('***정답 명단 업데이트 : ', postDetail?.passedUserNo?.includes(postDetail?.userNo))
+      //setMatchUser(true)
     }
-    console.log('***업데이트 정답자 명단 비교 : ', postDetail?.passedUserNo?.includes(postDetail?.userNo))
+    console.log('❗ matchUser : ' , matchUser)
+    console.log('***정답 명단 업데이트 : ', postDetail?.passedUserNo?.includes(postDetail?.userNo))
   }
 
   const dateEdit = postDetail?.createdAt?.slice(0, 10); //날짜 형식에 맞게 가공
@@ -90,6 +108,8 @@ const PostDetail = () => {
       alert('정답이 아닙니다! 다시 맞춰보세요~😀')
       return answerRef.current.focus();
     }
+    dispatch(__getPostDetail(paramId));
+    //setMatchUser(true)
   };
   const onClickViewHint = () => {
     setIsHint(true);
@@ -100,7 +120,7 @@ const PostDetail = () => {
     navigate("/posts");
   };
 
-  console.log('isAnswer 최종확인 : ', isAnswer)
+  console.log('❗❗❗ 최종확인 matchUser : ', matchUser)
 
   return (
     <StPostsWrap>
@@ -118,7 +138,7 @@ const PostDetail = () => {
               난이도 : {star}
             </StPostsDetailInfoWriteDifficulty>
           </StPostsDetailInfoWrite>
-          {!isAnswer ? 
+          {!matchUser ? //matchUser
             <StPostsDetailInfoAnswer>
               {!isHint ? 
                 <ButtonDefault

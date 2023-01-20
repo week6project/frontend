@@ -1,12 +1,6 @@
-import React, { useState, useEffect, useRef  } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
 
 //component, hooks
-import ButtonDefault from '../components/ButtonDefault';
-import InputWithLabelDefault from '../components/InputWithLabelDefault';
-import useInput from '../hooks/useInput';
-import { __getPostDetail } from '../redux/modules/postDetailSlice';
 import PostsDetailSuccessListAuth from '../components/PostsDetailSuccessListAuth';
 
 //style, etc
@@ -17,7 +11,7 @@ import '../css/style.css'
 const PostsDetailSuccessListBox = (postsDetailState) => {
     let keyI = 1
     const { isLoading, error, postDetail } = postsDetailState
-    const passedPeople = postDetail?.passedPeople
+    const passedPeople = postsDetailState.postsDetailState.passedPeople
     console.log('정답자 명단 보기 : ', passedPeople)
 
   return (
@@ -28,7 +22,7 @@ const PostsDetailSuccessListBox = (postsDetailState) => {
                     {isLoading && <StCenterMessage>열심히 데이터를 불러오는 중이에요~!</StCenterMessage>}
                     {error && <StCenterMessage>에러가 났네요! 다시 시도해주세요!</StCenterMessage>}
                     {!isLoading && !error 
-                    ? postDetail?.passedPeople?.length === 0
+                    && postDetail?.passedPeople?.length === 0
                       ? <StCenterMessage>정답자가 없습니다!</StCenterMessage>
                       : passedPeople?.map((person)=>{
                         console.log('person: ', person)
@@ -36,7 +30,6 @@ const PostsDetailSuccessListBox = (postsDetailState) => {
                           <PostsDetailSuccessListAuth key={keyI++} person={person}/>
                           )
                         })
-                    : null
                     }
                     
                 </StPostsDetailSuccessListUl>
