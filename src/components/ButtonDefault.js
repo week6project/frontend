@@ -17,6 +17,7 @@ const StButtonDefault=styled.button.attrs({
     height: 40px;
     border-radius: 20px;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
     background-color: ${(props)=> props.bgColor || 'transparent'};
     border: 1px solid ${(props)=> props.bgColor || '#e2e2e2'};
