@@ -1,17 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { serverUrl, tokenLocal, refreshToken } from ".";
+import { serverUrl } from ".";
 
 const initialState = {
   postDetail: {},
   isLoading: false,
   error: null,
+  isAnswerGlobal:false
 };
 
 export const __getPostDetail = createAsyncThunk(
   "posts/GET_POST_DETAIL",
   async (payload, thunkAPI) => {
     try{
+      console.log('포스트 상세 리듀서 콘솔 1')
+      const tokenLocal = localStorage.getItem('token');
+      console.log('포스트 상세 리듀서 콘솔 2 : ', tokenLocal)
+      const refreshToken = localStorage.getItem('refreshToken');
       const {data} = await axios.get(`${serverUrl}/posts/${payload}`,{
         headers: {
           authorization: tokenLocal,
@@ -31,7 +36,11 @@ export const __getPostDetail = createAsyncThunk(
 const postDetailSlice = createSlice({
   name: "postDetail",
   initialState,
-  reducers: {},
+  reducers: {
+    isAnswerGlobalToggle:(state, action)=>{
+      state.isAnswerGlobal=action.payload
+    }
+  },
   extraReducers: {
     [__getPostDetail.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
@@ -48,6 +57,6 @@ const postDetailSlice = createSlice({
 });
 
 // 액션크리에이터는 컴포넌트에서 사용하기 위해 export 하고
-export const {} = postDetailSlice.actions;
+export const {isAnswerGlobalToggle} = postDetailSlice.actions;
 // reducer 는 configStore에 등록하기 위해 export default 합니다.
 export default postDetailSlice.reducer;

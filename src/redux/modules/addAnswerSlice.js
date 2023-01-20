@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { serverUrl, tokenLocal, refreshToken } from ".";
+import { serverUrl } from ".";
 
 const initialState = {
   addAnswer: {},
@@ -13,6 +13,10 @@ export const __addAnswer = createAsyncThunk(
   "posts/ADD_ANSWER",
   async (payload, thunkAPI) => {
     try{
+      console.log('정답 제출 리듀서 콘솔 1')
+      const tokenLocal = localStorage.getItem('token');
+      console.log('정답 제출 리듀서 콘솔 2 : ', tokenLocal)
+      const refreshToken = localStorage.getItem('refreshToken');
       console.log('정답 제출 리듀서 payload : ', payload)
       const {data} = await axios.post(`${serverUrl}/posts/answerd`, payload ,{
         headers: {
