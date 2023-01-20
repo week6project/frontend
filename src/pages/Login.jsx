@@ -52,12 +52,12 @@ const Login = () => {
   //userId 특수문자 제외
   const IsLoginId = (e) => {
     //유효성 검사 아이디
-    const regexId = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{1,10}$/;
+    const regexId = /^[a-z|A-Z|0-9|]{1,10}$/;
     let { value } = e.target;
     if (!regexId.test(value)) {
       setIsId(false);
       console.log("setIsId : ", isId);
-      return setValidMessageId("❗ 한글, 영어, 숫자 / 10자 이내로 입력");
+      return setValidMessageId("❗ 영어, 숫자 / 10자 이내로 입력");
     } else {
       setIsId(true);
       console.log("setIsId2 : ", isId);
