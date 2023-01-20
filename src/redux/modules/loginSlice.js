@@ -26,8 +26,11 @@ export const __postUsers = createAsyncThunk(
         .then((res) => {
           const token = res.headers.authorization;
           const refreshToken = res.headers.refreshauthorization;
+          localStorage.clear();
           localStorage.setItem("token", token);
           localStorage.setItem("refreshToken", refreshToken);
+          console.log("token", token);
+          console.log("refresh", refreshToken);
 
           // 가져오기 코드 const tokenLocal = localStorage.getItem('token');
           return res;

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { serverUrl, tokenLocal, refreshToken } from ".";
+import { serverUrl } from ".";
 
 const initialState = {
   posts: [],
@@ -12,6 +12,9 @@ export const __getPosts = createAsyncThunk(
   "posts/GET_POSTS",
   async (payload, thunkAPI) => {
     try {
+      const tokenLocal = localStorage.getItem("token");
+
+      const refreshToken = localStorage.getItem("refreshToken");
       const data = await axios.get(`${serverUrl}/posts`, {
         headers: {
           authorization: tokenLocal,
