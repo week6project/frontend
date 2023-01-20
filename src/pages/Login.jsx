@@ -10,6 +10,7 @@ import ButtonDefault from "../components/ButtonDefault";
 import { COLORS } from "../style/StyleGlobal";
 import { __postUsers } from "../redux/modules/loginSlice";
 import useInput from "../hooks/useInput";
+import GoogleLoginBtn from "../components/GoogleLoginBtn";
 
 //로그인 페이지
 const Login = () => {
@@ -23,9 +24,11 @@ const Login = () => {
   const { data, error, isLoginOk } = useSelector((state) => state.loginSlice);
   const state = useSelector((state) => state.loginSlice);
 
+  const { data, error } = useSelector((state) => state.loginSlice);
+  const state = useSelector((state) => state);
+  //console.log("state", error);
   const [loginState, setLoginState]=useState(false)
 
-  
 
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
@@ -80,7 +83,10 @@ const Login = () => {
     let { value } = e.target;
     if (!regexPassword.test(value)) {
       setIsPassword(false);
-      return setValidMessagePassword("❗ 영어, 숫자 / 10자 이내로 입력");
+      console.log("setIsPassword : ", isPassword);
+      return setValidMessagePassword(
+        "❗ 영어, 숫자 / 4자이상 30자 이내로 입력",
+      );
     } else {
       setIsPassword(true);
       return setValidMessagePassword("");
@@ -103,6 +109,16 @@ const Login = () => {
       dispatch(__postUsers(User));
   };
 
+  //구글 로그인
+  function onSignIn(googleUser) {
+    const profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log("Name: " + profile.getName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+
+  //로그인 상태 OK일 경우 글 목록 페이지로 이동
   useEffect(()=>{
     if(state.users.status===200){
       navigate('/posts')
@@ -120,35 +136,52 @@ const Login = () => {
         <StForm name="LoginPage" method="POST" onSubmit={onSubmitLogin}>
           <StIDPW>
             <StH>ID</StH>
-            {validMessageId && <span> {validMessageId}</span>}
-            <InputWithLabelDefault
-              type="text"
-              name="ID"
-              maxlength="10"
-              value={userId}
-              validMessage={validMessageId}
-              onChange={onChangeInputUserId}
-              onBlur={IsLoginId}
-            />
+            <StRow>
+              {/* 태그 감싸서 블록처리하면됨 */}
+              {validMessageId && <StSpan> {validMessageId}</StSpan>}
+              <InputWithLabelDefault
+                type="text"
+                name="ID"
+                width="90%"
+                maxlength="10"
+                value={userId}
+                validMessage={validMessageId}
+                onChange={onChangeInputUserId}
+                onBlur={IsLoginId}
+              />
+            </StRow>
           </StIDPW>
           <StIDPW>
-            <StH>PW</StH>
-            {validMessagePassword && <span> {validMessagePassword}</span>}
-            <InputWithLabelDefault
-              type="password"
-              name="password"
-              maxlength="10"
-              value={password}
-              validMessage={validMessagePassword}
-              onChange={onChangeInputPassword}
-              onBlur={IsLoginPw}
-            />
+            <StH2>PW</StH2>
+            <StRow>
+              {validMessagePassword && (
+                <StSpan2> {validMessagePassword}</StSpan2>
+              )}
+              <InputWithLabelDefault
+                type="password"
+                name="password"
+                maxlength="30"
+                value={password}
+                validMessage={validMessagePassword}
+                onChange={onChangeInputPassword}
+                onBlur={IsLoginPw}
+              />
+            </StRow>
           </StIDPW>
           <StBtn>
-            <button>Login</button>
+            <ButtonDefault
+              bgColor={COLORS.defaultBlueLight}
+              hoverBgColor={COLORS.defaultBlueBold}
+              hoverFontColor={COLORS.defaultWhite}
+            >
+              Login
+            </ButtonDefault>
           </StBtn>
         </StForm>
-        <button>Social Login</button>
+        {/* 구글 */}
+        <div className="g-signin2" data-onsuccess="onSignIn"></div>
+
+        <GoogleLoginBtn />
         <StBtnRow>
           <ButtonDefault
             bgColor={COLORS.defaultLight}
@@ -207,17 +240,46 @@ const StIDPW = styled.div`
   flex-direction: row;
   justify-content: center;
   margin: 10px;
+  width: 320px;
+  height: 60px;
 `;
+const StSpan = styled.span`
+  position: absolute;
+  left: 500px;
+  top: 368px;
+`;
+const StSpan2 = styled.span`
+  position: absolute;
+  left: 500px;
+  top: 450px;
+`;
+const StRow = styled.div`
+  width: 400px;
+  display: felx;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
 const StH = styled.h4`
   width: 40px;
 
   margin: 0px 10px 0px 0px;
-  position: relative;
-  top: 9px;
+  position: absolute;
+  left: 500px;
+  top: 398px;
+`;
+const StH2 = styled.h4`
+  width: 40px;
+
+  margin: 0px 10px 0px 0px;
+  position: absolute;
+  left: 500px;
+  top: 476px;
 `;
 
 const InputWithLabelDefault = styled.input`
-  width: 150px;
+  width: 200px;
   height: 30px;
   border: 2px solid black;
   border-radius: 5px;
@@ -230,6 +292,8 @@ const StBtn = styled.div`
 
   display: flex;
   flex-direction: column;
+  position: relative;
+  left: 30px;
 `;
 
 const StBtnRow = styled.div`

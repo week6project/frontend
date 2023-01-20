@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import InputWithLabelDefault from "../components/InputWithLabelDefault";
 import { useDispatch, useSelector } from "react-redux";
 import { __postFormData } from "../redux/modules/postSlice";
+import CanvasTest from "../components/CanvasTest";
 
-const Post = () => {
+const Post2 = () => {
   const dispatch = useDispatch();
 
   // 정답입력 유효성
@@ -158,30 +159,9 @@ const Post = () => {
           onSubmit={onClickFormData}
         >
           <StLeftForm>
-            <StPrivew>
-              {imageSrc && <Stimg src={imageSrc} alt="preview-img" />}
-            </StPrivew>
+            <CanvasTest />
           </StLeftForm>
           <StRightForm>
-            <StctrlBtn>
-              <StIn2
-                type="file"
-                id="preview"
-                name="image"
-                accept="image/*"
-                onChange={onChangeFile}
-                style={{ display: "none" }}
-              />
-              {/* <StLabel for="preview">Btn</StLabel> */}
-              <label for="preview">
-                <StImgIcon
-                  src="img/fileImg.png"
-                  id="imgChange"
-                  alt="사진 업로드"
-                />
-              </label>
-              <StSpan> ← 이미지 업로드</StSpan>
-            </StctrlBtn>
             <StDifficult>
               <StSelect onChange={onDifficult} value={difficult}>
                 <option value="0" key="0">
@@ -243,7 +223,7 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default Post2;
 
 const StPost = styled.div`
   background-image: url("img/myGiraffe_BG-01.png"),
