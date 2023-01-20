@@ -306,8 +306,10 @@ const StLeftForm = styled.div`
   justify-content: center;
 `;
 const Stimg = styled.img`
-  width: 400px;
-  height: 400px;
+  width: auto;
+  height: auto;
+  max-width: 400px;
+  max-height: 400px;
 `;
 
 const StRightForm = styled.div`
