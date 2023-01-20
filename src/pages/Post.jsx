@@ -97,6 +97,8 @@ const Post = () => {
     }
 
     dispatch(__postFormData(formData));
+    alert("업로드 성공🦒");
+    navigate("/posts");
   };
   //answer 상태, 상태 메세지
   const [isAnswer, setIsAnswer] = useState(false);

@@ -3,6 +3,12 @@
   --color-defaultLight: #d8b0f7;
 }
 
+.loginBtn {
+  margin-bottom: 100px;
+}
+.displayNone {
+  display: none !important;
+}
 /*회원가입*/
 .iconIoMdCloseCircle {
   position: absolute;

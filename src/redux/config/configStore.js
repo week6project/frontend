@@ -1,6 +1,6 @@
 // src/redux/config/configStore.js
 
-import { configureStore, getDefaultMiddleware  } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import signup from "../modules/signup";
 import forgotPw from "../modules/forgotPw";
@@ -8,7 +8,8 @@ import postsSlice from "../modules/postsSlice";
 import postDetailSlice from "../modules/postDetailSlice";
 import loginSlice from "../modules/loginSlice";
 import postSlice from "../modules/postSlice";
-import addAnswerSlice from '../modules/addAnswerSlice';
+import post2Slice from "../modules/post2Slice";
+import addAnswerSlice from "../modules/addAnswerSlice";
 
 const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ const store = configureStore({
     postDetailSlice,
     loginSlice,
     postSlice,
-    addAnswerSlice,//정답 제출 모듈
+    post2Slice,
+    addAnswerSlice, //정답 제출 모듈
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: getDefaultMiddleware({
