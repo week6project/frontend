@@ -173,7 +173,7 @@ const Post = () => {
                 style={{ display: "none" }}
               />
               {/* <StLabel for="preview">Btn</StLabel> */}
-              <label for="preview">
+              <label htmlFor="preview">
                 <StImgIcon
                   src="img/fileImg.png"
                   id="imgChange"
