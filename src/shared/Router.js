@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Layout from "./Layout";
 import Posts from "../pages/Posts";
 import Post from "../pages/Post";
+import Post2 from "../pages/Post2";
 
 import PostDetail from "../pages/PostDetail";
 
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:postId" element={<PostDetail />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/post2" element={<Post2 />} />
         </Routes>
       </Layout>
     </BrowserRouter>
