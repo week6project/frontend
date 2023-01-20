@@ -194,7 +194,7 @@ const Login = () => {
             hoverFontColor={COLORS.defaultWhite}
             onClick={onClickOpenForgotPw}
           >
-            Forgot Pw 변경
+            Forgot Pw
           </ButtonDefault>
         </StBtnRow>
       </StLogin>
