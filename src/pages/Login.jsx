@@ -12,6 +12,7 @@ import { __postUsers } from "../redux/modules/loginSlice";
 import useInput from "../hooks/useInput";
 import GoogleLoginBtn from "../components/GoogleLoginBtn";
 
+import "../css/style.css";
 //로그인 페이지
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,8 @@ const Login = () => {
   //로그인
   const { data, error } = useSelector((state) => state.loginSlice);
   const state = useSelector((state) => state.loginSlice);
-  console.log('로그인 ❗❗❗ state : ' , state)
-  const [loginState, setLoginState]=useState(false)
-
+  console.log("로그인 ❗❗❗ state : ", state);
+  const [loginState, setLoginState] = useState(false);
 
   //회원가입, 비밀번호 변경
   const { isModalToggleSignup } = useSelector((state) => state.signup);
@@ -38,7 +38,7 @@ const Login = () => {
   const [password, onChangeInputPassword, setPassword] = useInput("");
 
   //로그인 값
-  const [isLoginState, setIsLoginState]=useState(false)
+  const [isLoginState, setIsLoginState] = useState(false);
 
   const onClickOpenSignup = () => {
     dispatch(isModalGlobalToggleSignup(true));
@@ -92,17 +92,17 @@ const Login = () => {
     //   setpassword(curValue.replace(notPw, ""));
   };
 
-   const onSubmitLogin = async (event) =>  {
+  const onSubmitLogin = async (event) => {
     event.preventDefault();
     //유효성 검사
     if (isId === false && isPassword === false) return false;
-      const User = {
-        id: Date.now(),
-        userId,
-        password,
-      };
-      console.log('로그인 디스패치 시작')
-      dispatch(__postUsers(User));
+    const User = {
+      id: Date.now(),
+      userId,
+      password,
+    };
+    console.log("로그인 디스패치 시작");
+    dispatch(__postUsers(User));
   };
 
   //구글 로그인
@@ -115,14 +115,13 @@ const Login = () => {
   }
 
   //로그인 상태 OK일 경우 글 목록 페이지로 이동
-  useEffect(()=>{
-    if(state.users.status===200){
-      navigate('/posts')
+  useEffect(() => {
+    if (state.users.status === 200) {
+      navigate("/posts");
     }
-  },[state])
-  
+  }, [state]);
+
   console.log("로그인 최종 state : ", state);
-  
 
   return (
     <>
@@ -130,41 +129,44 @@ const Login = () => {
         <StImg src="img/myGiraffe.png" alt="내기린_로고" />
         <StForm name="LoginPage" method="POST" onSubmit={onSubmitLogin}>
           <StIDPW>
-            <StH>ID</StH>
             <StRow>
               {/* 태그 감싸서 블록처리하면됨 */}
               {validMessageId && <StSpan> {validMessageId}</StSpan>}
-              <InputWithLabelDefault
-                type="text"
-                name="ID"
-                width="90%"
-                maxlength="10"
-                value={userId}
-                validMessage={validMessageId}
-                onChange={onChangeInputUserId}
-                onBlur={IsLoginId}
-              />
+              <StDiv>
+                <StH>ID</StH>
+                <InputWithLabelDefault
+                  type="text"
+                  name="ID"
+                  width="90%"
+                  maxlength="10"
+                  value={userId}
+                  validMessage={validMessageId}
+                  onChange={onChangeInputUserId}
+                  onBlur={IsLoginId}
+                />
+              </StDiv>
             </StRow>
           </StIDPW>
           <StIDPW>
-            <StH2>PW</StH2>
             <StRow>
-              {validMessagePassword && (
-                <StSpan2> {validMessagePassword}</StSpan2>
-              )}
-              <InputWithLabelDefault
-                type="password"
-                name="password"
-                maxlength="30"
-                value={password}
-                validMessage={validMessagePassword}
-                onChange={onChangeInputPassword}
-                onBlur={IsLoginPw}
-              />
+              {validMessagePassword && <StSpan> {validMessagePassword}</StSpan>}
+              <StDiv>
+                <StH>PW</StH>
+                <InputWithLabelDefault
+                  type="password"
+                  name="password"
+                  maxlength="30"
+                  value={password}
+                  validMessage={validMessagePassword}
+                  onChange={onChangeInputPassword}
+                  onBlur={IsLoginPw}
+                />
+              </StDiv>
             </StRow>
           </StIDPW>
           <StBtn>
             <ButtonDefault
+              className="loginBtn"
               bgColor={COLORS.defaultBlueLight}
               hoverBgColor={COLORS.defaultBlueBold}
               hoverFontColor={COLORS.defaultWhite}
@@ -239,19 +241,17 @@ const StIDPW = styled.div`
   height: 60px;
 `;
 const StSpan = styled.span`
-  position: absolute;
-  left: 500px;
-  top: 368px;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
 `;
-const StSpan2 = styled.span`
-  position: absolute;
-  left: 500px;
-  top: 450px;
-`;
+
 const StRow = styled.div`
   width: 400px;
-  display: felx;
-  flex-direction: row;
+  display: flex;
+
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -260,19 +260,12 @@ const StH = styled.h4`
   width: 40px;
 
   margin: 0px 10px 0px 0px;
-  position: absolute;
-  left: 500px;
-  top: 398px;
 `;
-const StH2 = styled.h4`
-  width: 40px;
-
-  margin: 0px 10px 0px 0px;
-  position: absolute;
-  left: 500px;
-  top: 476px;
+const StDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
-
 const InputWithLabelDefault = styled.input`
   width: 200px;
   height: 30px;
@@ -283,6 +276,7 @@ const InputWithLabelDefault = styled.input`
 const StBtn = styled.div`
   box-sizing: content-box;
   margin-top: 20px;
+  margin-bottom: 10px;
   width: 208px;
 
   display: flex;

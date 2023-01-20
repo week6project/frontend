@@ -15,20 +15,26 @@ import { COLORS } from "../style/StyleGlobal";
 
 const Posts = () => {
   const dispatch = useDispatch();
-  useEffect(()=>{ //페이지 렌더링 후 posts 목록 가져오기
-    dispatch(__getPosts())
-  }, [dispatch])
+  useEffect(() => {
+    //페이지 렌더링 후 posts 목록 가져오기
+    dispatch(__getPosts());
+  }, [dispatch]);
   const { isLoading, error } = useSelector((state) => state.postsSlice);
   //const { posts } = useSelector((state) => state.postsSlice);
   const { posts } = useSelector((state) => state.postsSlice);
-  console.log('posts 확인 !! : ' , posts )
+  console.log("posts 확인 !! : ", posts);
   //console.log('posts: ', posts)
 
-  const navigate=useNavigate()
-  const onClickNavPost=()=>{ //문제내기 버튼 클릭시 글작성 페이지로 이동
-    navigate('/post')
-  }
-  console.log('포스트 메인 본문 시작')
+  const navigate = useNavigate();
+  const onClickNavPost = () => {
+    //문제내기 버튼 클릭시 글작성 페이지로 이동
+    navigate("/post");
+  };
+  const onClickNavPost2 = () => {
+    //문제내기 버튼 클릭시 글작성 페이지로 이동
+    navigate("/post2");
+  };
+  console.log("포스트 메인 본문 시작");
 
   return (
     <StPostsWrap>
@@ -38,7 +44,14 @@ const Posts = () => {
           bgColor={COLORS.defaultLight}
           hoverBgColor={COLORS.defaultPoint}
         >
-          문제내기
+          파일첨부
+        </ButtonDefault>
+        <ButtonDefault
+          onClick={onClickNavPost2}
+          bgColor={COLORS.defaultLight}
+          hoverBgColor={COLORS.defaultPoint}
+        >
+          내가그리기
         </ButtonDefault>
       </StPostsButtonBox>
       <StPostsUl>

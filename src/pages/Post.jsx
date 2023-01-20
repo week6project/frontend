@@ -97,6 +97,8 @@ const Post = () => {
     }
 
     dispatch(__postFormData(formData));
+    alert("업로드 성공🦒");
+    navigate("/posts");
   };
   //answer 상태, 상태 메세지
   const [isAnswer, setIsAnswer] = useState(false);
@@ -173,7 +175,7 @@ const Post = () => {
                 style={{ display: "none" }}
               />
               {/* <StLabel for="preview">Btn</StLabel> */}
-              <label for="preview">
+              <label htmlFor="preview">
                 <StImgIcon
                   src="img/fileImg.png"
                   id="imgChange"
@@ -304,8 +306,10 @@ const StLeftForm = styled.div`
   justify-content: center;
 `;
 const Stimg = styled.img`
-  width: 400px;
-  height: 400px;
+  width: auto;
+  height: auto;
+  max-width: 400px;
+  max-height: 400px;
 `;
 
 const StRightForm = styled.div`

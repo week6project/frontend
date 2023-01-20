@@ -84,7 +84,7 @@ const Post2 = () => {
     };
 
     // 난이도, 정답인풋, 힌트인풋
-    formData.append("image", fileImg);
+    formData.append("image", formSaveImg);
     formData.append("difficult", difficult);
     formData.append("inputAnswer", inputAnswer);
     formData.append("inputHint", inputHint);
@@ -98,6 +98,8 @@ const Post2 = () => {
     }
 
     dispatch(__postFormData(formData));
+    alert("업로드 성공🦒");
+    navigate("/posts");
   };
   //answer 상태, 상태 메세지
   const [isAnswer, setIsAnswer] = useState(false);
@@ -141,6 +143,29 @@ const Post2 = () => {
   const onClickGoHome = () => {
     navigate("/posts");
   };
+
+  //변환
+
+  const saveData = useSelector((state) => state.post2Slice.decodeImg);
+
+  function base64toFile(saveData, filename) {
+    if (saveData !== null) {
+      var arr = saveData.split(","),
+        mime = "png",
+        bstr = window.atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+
+      return new File([u8arr], filename, { type: mime });
+    }
+  }
+  const formSaveImg = base64toFile(saveData, "test.png");
+  console.log("saveData2", saveData);
+  console.log("base64toFile", base64toFile(saveData, "test.png"));
 
   return (
     <StPost>
