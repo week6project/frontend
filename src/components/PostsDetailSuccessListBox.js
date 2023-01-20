@@ -14,11 +14,11 @@ import styled from "styled-components";
 import {COLORS} from '../style/StyleGlobal'
 import '../css/style.css'
 
-const PostsDetailSuccessListBox = () => {
+const PostsDetailSuccessListBox = (postsDetailState) => {
     let keyI = 1
-    const { isLoading, error, postDetail } = useSelector((state) => state.postDetailSlice);
-    const passedPeople = postDetail.passedPeople
-    console.log('정답자 확인 postDetail : ', postDetail)
+    const { isLoading, error, postDetail } = postsDetailState
+    const passedPeople = postDetail?.passedPeople
+    console.log('정답자 명단 보기 : ', passedPeople)
 
   return (
     <StPostsDetailSuccessListBox>
@@ -66,19 +66,19 @@ const StPostsDetailSuccessListUlBox=styled.div`
 `
 const StPostsDetailSuccessListUl=styled.ul`
   width: 100%;
-  height: 194px;
+  height: 150px;
   overflow-y: auto;
-    ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 10px;
-}
-    ::-webkit-scrollbar-track {
-        background-color: #fa9370;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-        background-color: #f44408;
-        border-radius: 10px;
-    }
+  }
+  ::-webkit-scrollbar-track {
+      background-color: #fa9370;
+      border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+      background-color: #f44408;
+      border-radius: 10px;
+  }
 
 `
 const StPostsDetailSuccessListBoxTitle=styled.span`
