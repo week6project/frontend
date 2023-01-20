@@ -2,10 +2,12 @@ import React from "react";
 import CanvasDraw from "react-canvas-draw";
 //import { GithubPicker } from "react-color";
 import { TwitterPicker } from "react-color";
+import { useDispatch } from "react-redux";
 
 import "../css/style.css";
 import { useClickAway } from "../hooks/useClickAway";
 import classNames from "classnames";
+import { getDecodeImg } from "../redux/modules/post2Slice";
 
 const defaultProps = {
   loadTimeOffset: 5,
@@ -63,11 +65,16 @@ function CanvasTest() {
     canvasRef.current.clear();
     setSaveData("");
   };
+  console.log("getImg", getImg);
 
+  const dispatch = useDispatch();
   const handleCanvasChange = () => {
     const saveData = getImg();
     setSaveData(saveData);
+    dispatch(getDecodeImg(saveData));
   };
+
+  console.log("데이터", saveData);
 
   const props = {
     ...defaultProps,
@@ -135,8 +142,13 @@ function CanvasTest() {
       </div>
       {saveData && (
         <>
-          {/* <img src={saveData} alt="" />
-          <textarea rows={10} value={saveData} readOnly /> */}
+          {/* <img src={saveData} alt="" /> */}
+          <textarea
+            className="displayNone"
+            rows={10}
+            value={saveData}
+            readOnly
+          />
         </>
       )}
     </div>
